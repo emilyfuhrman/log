@@ -1,9 +1,9 @@
 {% include header.html %}
 	{% for post in site.posts %}
 		{% for img in post.images %}
-		<a href='/log{{ post.url }}'>
+			<!-- <a href='/log{{ post.url }}'> -->
 			<img class="post-img _{{ img.ar }}" src="/log/photos/{{ img.ext }}"/>
-		</a>
+			<!-- </a> -->
 		{% endfor %}
 	{% endfor %}
 {% include footer.html %}
