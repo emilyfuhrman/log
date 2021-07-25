@@ -3,7 +3,58 @@ sitemap:
   exclude: 'yes'
 ---
 
-img._4-5 {
-	width:33%;
-	width:calc(100vw / 3);
+$color_black:#111;
+
+@mixin transition($transition...) {
+  -webkit-transition:$transition;
+     -moz-transition:$transition;
+      -ms-transition:$transition;
+          transition:$transition;
 }
+@mixin box-sizing($box-sizing...) {
+  -webkit-box-sizing:$box-sizing;
+     -moz-box-sizing:$box-sizing;
+      -ms-box-sizing:$box-sizing;
+          box-sizing:$box-sizing;
+}
+
+html,
+body {
+	width:100%;
+	color:$color_black;
+	font-size:20px;
+	font-family:'Helvetica','Arial',sans-serif;
+	font-weight:normal;
+	line-height:1.6em;
+	letter-spacing:0.05rem;
+	margin:0;
+	-webkit-text-size-adjust:100%;
+	}
+body {
+	padding:0.25rem;
+	@include box-sizing(border-box);
+}
+
+.img-holder {
+	float:left;
+	background-size:cover;
+	background-position:center;
+	background-repeat:no-repeat;
+	height:45vw;
+	border:0.25rem solid #fff;
+	overflow:hidden;
+	@include box-sizing(border-box);
+	}
+
+.img-holder._4-5._v {
+	width:35%;
+	/*width:calc(100vw / 3);*/
+}
+.img-holder._4-5._h {
+	/*width:61%;*/
+	/*width:calc(2 * (100vw / 3));*/
+}
+.img-holder._2-3._h {
+	width:65%;
+}
+
