@@ -21,8 +21,8 @@
 title: EF Log
 description: >- # this means to ignore newlines until "baseurl:"
   Georeferenced photolog.
-# baseurl: "/log" # the subpath of your site, e.g. /blog
-# url: "http://emilyfuhrman.co" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/log" # the subpath of your site, e.g. /blog
+url: "http://emilyfuhrman.co" # the base hostname & protocol for your site, e.g. http://example.com
 
 # formatting
 sass:
