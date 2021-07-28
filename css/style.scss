@@ -2,6 +2,7 @@
 sitemap:
   exclude: 'yes'
 ---
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
 
 $color_black:#111;
 $color_lg:#f2f2f2;
@@ -35,6 +36,35 @@ body {
 	padding:0.25rem;
 	@include box-sizing(border-box);
 }
+
+#nav {
+	width:480px;
+	height:120px;
+	margin:0.25rem;
+	padding-left:120px;
+	}
+
+#nav a {
+	color:$color_black;
+	}
+	
+#nav .header-anno {
+	float:left;
+	width:100%;
+	height:30px;
+	font-family:'Playfair Display SC', 'Times', serif;
+	text-align:center;
+	text-transform:uppercase;
+	}
+
+#nav .header-anno#title {
+	font-size:1.4rem;
+	letter-spacing:0.15rem;
+	margin-top:1rem;
+	}
+#nav .header-anno#subtitle {
+	font-size:0.6rem;
+	}
 
 .container#log {
 	opacity:0;
