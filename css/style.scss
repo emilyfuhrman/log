@@ -35,6 +35,14 @@ body {
 	@include box-sizing(border-box);
 }
 
+.container#log {
+	opacity:0;
+	@include transition(opacity 240ms ease);
+	}
+.container#log.show {
+	opacity:1;
+	}
+
 .img-holder {
 	float:left;
 	background-size:cover;
