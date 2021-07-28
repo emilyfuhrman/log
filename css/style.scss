@@ -4,6 +4,7 @@ sitemap:
 ---
 
 $color_black:#111;
+$color_lg:#f2f2f2;
 
 @mixin transition($transition...) {
   -webkit-transition:$transition;
@@ -110,7 +111,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: $color_black;
+  background-color: $color_lg;
   -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
           animation: sk-foldCubeAngle 2.4s infinite linear both;
   -webkit-transform-origin: 100% 100%;
