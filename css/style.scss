@@ -85,13 +85,42 @@ body {
 	@include box-sizing(border-box);
 	}
 
-.img-holder._4-5._v {
+.img-holder._4-5._30._v {
+	width:30%;
+	height:37vw;
+}
+.img-holder._4-5._33._v {
+	width:33%;
+	width:calc(100% / 3);
+	height:41vw;
+}
+.img-holder._4-5._35._v {
+	width:35%;
+	height:43vw;
+}
+.img-holder._4-5._40._v {
+	width:40%;
+	height:50vw;
+}
+.img-holder._4-5._50._v {
 	width:50%;
 	height:62vw;
 }
-.img-holder._4-5._h {
+.img-holder._2-3._40._h {
+	width:40%;
+	height:26vw;
 }
-.img-holder._2-3._h {
+.img-holder._2-3._60._h {
+	width:60%;
+	height:40vw;
+}
+.img-holder._2-3._65._h {
+	width:65%;
+	height:43vw;
+}
+.img-holder._2-3._70._h {
+	width:70%;
+	height:46vw;
 }
 
 /* 	------------------------------------
