@@ -2,7 +2,6 @@
 sitemap:
   exclude: 'yes'
 ---
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
 
 $color_black:#111;
 $color_lg:#f2f2f2;
@@ -30,17 +29,21 @@ body {
 	line-height:1.6em;
 	letter-spacing:0.05rem;
 	margin:0;
+	overscroll-behavior: none;
 	-webkit-text-size-adjust:100%;
 	}
 body {
+	float:left;
+	min-height:100vh;
 	padding:0.25rem;
+	border-left:20px solid #FFF8E7;
+	border-right:20px solid #FFF8E7;
 	@include box-sizing(border-box);
 }
 
 #nav {
 	width:480px;
 	height:120px;
-	margin:0.25rem;
 	padding-left:120px;
 	}
 
@@ -51,23 +54,26 @@ body {
 #nav .header-anno {
 	float:left;
 	width:100%;
-	height:30px;
-	font-family:'Playfair Display SC', 'Times', serif;
 	text-align:center;
-	text-transform:uppercase;
+	padding:0.125rem 0;
+	@include box-sizing(border-box);
 	}
-
 #nav .header-anno#title {
-	font-size:1.4rem;
-	letter-spacing:0.15rem;
-	margin-top:1.5rem;
+	margin-top:20px;
 	}
 #nav .header-anno#subtitle {
-	font-size:0.6rem;
+	font-size:0.5rem;
+	text-transform:uppercase;
+	border-top:1px solid $color_lg;
 	}
 
 .container#log {
 	opacity:0;
+	float:left;
+	width:90%;
+	width:calc(100% - 0.25rem);
+	margin-left:0.125rem;
+	margin-bottom:0.25rem;
 	@include transition(opacity 240ms ease);
 	}
 .container#log.show {
@@ -109,6 +115,10 @@ body {
 .img-holder._2-3._40._h {
 	width:40%;
 	height:26vw;
+}
+.img-holder._2-3._50._h {
+	width:50%;
+	height:33vw;
 }
 .img-holder._2-3._60._h {
 	width:60%;
