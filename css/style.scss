@@ -4,7 +4,9 @@ sitemap:
 ---
 
 $color_black:#111;
-$color_lg:#f2f2f2;
+$color_lg:#F2F2F2;
+$color_latte:#FFF8E7;
+$color_ballet:#F0B293;
 
 @mixin transition($transition...) {
   -webkit-transition:$transition;
@@ -35,45 +37,47 @@ body {
 body {
 	float:left;
 	min-height:100vh;
-	padding:0.25rem;
-	border-left:20px solid #FFF8E7;
-	border-right:20px solid #FFF8E7;
+	padding:1px;
 	@include box-sizing(border-box);
 }
 
 #nav {
+	z-index:99;
+	position:fixed;
+	width:100%;
+	height:120px;
+	top:0;
+	left:0;
+	}
+
+#nav #nav-container {
 	width:480px;
 	height:120px;
-	padding-left:120px;
+	margin-left:calc((100% - 480px)/2);
 	}
 
 #nav a {
-	color:$color_black;
+	color:$color_ballet;
 	}
 
 #nav .header-anno {
 	float:left;
 	width:100%;
 	text-align:center;
-	padding:0.125rem 0;
+	text-transform:uppercase;
 	@include box-sizing(border-box);
 	}
 #nav .header-anno#title {
-	margin-top:20px;
-	}
-#nav .header-anno#subtitle {
-	font-size:0.5rem;
-	text-transform:uppercase;
-	border-top:1px solid $color_lg;
+	font-size:2rem;
+	font-weight:bold;
+	letter-spacing:0.075rem;
+	margin-top:30px;
 	}
 
 .container#log {
 	opacity:0;
 	float:left;
-	width:90%;
-	width:calc(100% - 0.25rem);
-	margin-left:0.125rem;
-	margin-bottom:0.25rem;
+	width:100%;
 	@include transition(opacity 240ms ease);
 	}
 .container#log.show {
@@ -86,7 +90,7 @@ body {
 	background-position:center;
 	background-repeat:no-repeat;
 	height:45vw;
-	border:0.25rem solid #fff;
+	border:1px solid #fff;
 	overflow:hidden;
 	@include box-sizing(border-box);
 	}
@@ -177,7 +181,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #FFF8E7;
+  background-color: $color_ballet;
   -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
           animation: sk-foldCubeAngle 2.4s infinite linear both;
   -webkit-transform-origin: 100% 100%;
