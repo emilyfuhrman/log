@@ -96,6 +96,10 @@ body {
 	@include box-sizing(border-box);
 	}
 
+/* 	------------------------------------
+		IMAGE DIMENSIONS
+   	------------------------------------ */
+
 .img-holder._4-5._30._v {
 	width:30%;
 	height:37vw;
@@ -117,6 +121,7 @@ body {
 	width:50%;
 	height:62vw;
 }
+
 .img-holder._2-3._40._h {
 	width:40%;
 	height:26vw;
@@ -138,9 +143,22 @@ body {
 	height:46vw;
 }
 
-/* 	------------------------------------
+.img-holder._3-4._45._h {
+	width:40%;
+	height:30vw;
+}
+.img-holder._3-4._45._h {
+	width:45%;
+	height:33vw;
+}
+.img-holder._3-4._50._h {
+	width:50%;
+	height:37vw;
+}
+
+/* 	====================================
 		LOADING ANIMATION
-   	------------------------------------ */
+   	==================================== */
 
 #loading-animation {
 	z-index:10000;
