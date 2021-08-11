@@ -42,7 +42,7 @@ body {
 body {
 	float:left;
 	min-height:100vh;
-	padding:1px;
+	padding:5px;
 	@include box-sizing(border-box);
 }
 
@@ -91,7 +91,7 @@ body {
 	background-position:center;
 	background-repeat:no-repeat;
 	height:45vw;
-	border:1px solid #fff;
+	border:5px solid #fff;
 	overflow:hidden;
 	@include box-sizing(border-box);
 	}
@@ -100,6 +100,57 @@ body {
 		IMAGE DIMENSIONS
    	------------------------------------ */
 
+.img-holder._3-4._40._h {
+	width:40%;
+	height:30vw;
+}
+.img-holder._3-4._45._h {
+	width:45%;
+	height:33vw;
+}
+.img-holder._3-4._50._h {
+	width:50%;
+	height:37vw;
+}
+.img-holder._3-4._55._h {
+	width:55%;
+	height:41vw;
+}
+.img-holder._3-4._60._h {
+	width:60%;
+	height:45vw;
+}
+.img-holder._3-4._64._h { /* [COMPATIBLE] */
+	width:64%;
+	height:48vw;
+}
+.img-holder._3-4._65._h {
+	width:65%;
+	height:48vw;
+}
+.img-holder._3-4._66._h {
+	width:66%;
+	width:calc((100% / 3)*2);
+	height:49vw;
+}
+
+.img-holder._3-4._34._v {
+	width:34%;
+	height:45vw;
+}
+.img-holder._3-4._35._v {
+	width:35%;
+	height:46vw;
+}
+.img-holder._3-4._36._v { /* [COMPATIBLE] */
+	width:36%;
+	height:48vw;
+}
+
+.img-holder._4-5._25._v {
+	width:25%;
+	height:31vw;
+}
 .img-holder._4-5._30._v {
 	width:30%;
 	height:37vw;
@@ -109,9 +160,25 @@ body {
 	width:calc(100% / 3);
 	height:41vw;
 }
-.img-holder._4-5._35._v {
+.img-holder._4-5._35._v { /* [COMPATIBLE] */
 	width:35%;
 	height:43vw;
+}
+.img-holder._4-5._36._v {
+	width:36%;
+	height:45vw;
+}
+.img-holder._4-5._37._v {
+	width:37%;
+	height:46vw;
+}
+.img-holder._4-5._38._v {
+	width:38%;
+	height:47vw;
+}
+.img-holder._4-5._39._v {
+	width:39%;
+	height:48w;
 }
 .img-holder._4-5._40._v {
 	width:40%;
@@ -120,6 +187,11 @@ body {
 .img-holder._4-5._50._v {
 	width:50%;
 	height:62vw;
+}
+
+.img-holder._4-5._50._h {
+	width:50%;
+	height:40vw;
 }
 
 .img-holder._2-3._40._h {
@@ -134,26 +206,13 @@ body {
 	width:60%;
 	height:40vw;
 }
-.img-holder._2-3._65._h {
+.img-holder._2-3._65._h { /* [COMPATIBLE] */
 	width:65%;
 	height:43vw;
 }
 .img-holder._2-3._70._h {
 	width:70%;
 	height:46vw;
-}
-
-.img-holder._3-4._45._h {
-	width:40%;
-	height:30vw;
-}
-.img-holder._3-4._45._h {
-	width:45%;
-	height:33vw;
-}
-.img-holder._3-4._50._h {
-	width:50%;
-	height:37vw;
 }
 
 /* 	====================================
