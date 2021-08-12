@@ -1,8 +1,10 @@
-//posts image array [Liquid -> JS]
-var posts = JEKYLL_POST_IMAGES;
-
-//grab image container
+//image container and layout parameters
 var $content = $('.container#log');
+var gridSettings = {
+	containerWidth:  window.innerWidth,
+	columnCount:     2,
+	spacing:         5
+}
 
 //image layout logic
 //via: https://github.com/naturalatlas/image-layout/blob/master/examples/index.js
@@ -28,11 +30,7 @@ function generateGrid(options, images) {
 	container.appendChild(photoset);
 }
 
-generateGrid({
-	containerWidth: window.innerWidth,
-	columnCount: 2,
-	spacing: 5
-}, JEKYLL_POST_IMAGES);
+generateGrid(gridSettings, JEKYLL_POST_IMAGES);
 
 //run everything once images are loaded
 $content.imagesLoaded({ background: '.tile' }).always(function(){
