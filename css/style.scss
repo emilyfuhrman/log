@@ -42,6 +42,7 @@ body {
 body {
 	float:left;
 	min-height:100vh;
+	overflow-x:hidden;
 	@include box-sizing(border-box);
 }
 
