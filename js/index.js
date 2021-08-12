@@ -1,0 +1,41 @@
+//posts image array [Liquid -> JS]
+var posts = JEKYLL_POST_IMAGES;
+
+//grab image container
+var $content = $('.container#log');
+
+//image layout logic
+//via: https://github.com/naturalatlas/image-layout/blob/master/examples/index.js
+function generateGrid(options, images) {
+
+	// calculate positioning
+	var photoset = document.createElement('div');
+	photoset.className = 'photos';
+	// var result = layout(images, options);
+	var result = layout_fixedPartition(images, options);
+
+	// build html
+	var elements = [];
+	var positions = result.positions;
+	for (var i = 0, n = positions.length; i < n; i++) {
+		elements.push('<div class="tile" style="background-image:url(' + images[i].src + ');width:' + positions[i].width + 'px;height:' + positions[i].height + 'px;left:' + positions[i].x + 'px;top:' + positions[i].y + 'px;position:absolute;"></div>');
+	}
+	photoset.innerHTML = elements.join('');
+	photoset.style.width = result.width + 'px';
+	photoset.style.height = result.height + 'px';
+
+	var container = document.getElementById('log');
+	container.appendChild(photoset);
+}
+
+//run everything once images are loaded
+$content.imagesLoaded({ background: '.tile' }).always(function(){
+	$('#loading-animation').addClass('hide');
+	$content.addClass('show');
+});
+
+generateGrid({
+	containerWidth: window.innerWidth,
+	columnCount: 2,
+	spacing: 5
+}, JEKYLL_POST_IMAGES);

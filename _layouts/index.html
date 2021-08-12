@@ -1,7 +1,3 @@
 {% include header.html %}
-	{% for post in site.posts %}
-		{% for img in post.images reversed %}
-			<div class='img-holder _{{ img.asp }} _{{ img.dim }} _{{ img.dir }}' style='background-image:url("/log/photos/{{ post.post_id }}_{{ img.ext }}");'></div>
-		{% endfor %}
-	{% endfor %}
+<div id="log" class="container"></div>
 {% include footer.html %}
