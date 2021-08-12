@@ -28,14 +28,14 @@ function generateGrid(options, images) {
 	container.appendChild(photoset);
 }
 
-//run everything once images are loaded
-$content.imagesLoaded({ background: '.tile' }).always(function(){
-	$('#loading-animation').addClass('hide');
-	$content.addClass('show');
-});
-
 generateGrid({
 	containerWidth: window.innerWidth,
 	columnCount: 2,
 	spacing: 5
 }, JEKYLL_POST_IMAGES);
+
+//run everything once images are loaded
+$content.imagesLoaded({ background: '.tile' }).always(function(){
+	$('#loading-animation').addClass('hide');
+	$content.addClass('show');
+});
