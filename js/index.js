@@ -3,7 +3,7 @@ var $content = $('.container#log');
 var gridSettings = {
 	containerWidth:  window.innerWidth,
 	columnCount:     2,
-	spacing:         5
+	spacing:         6
 }
 
 //image layout logic
