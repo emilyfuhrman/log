@@ -98,7 +98,6 @@ body {
 	width:100%;
 	height:1.2rem;
 	bottom:10px;
-	@include transition(opacity 240ms ease);
 	}
 .tile:hover #caption {
 	opacity:1;
