@@ -1,7 +1,7 @@
 //image container and layout parameters
 var $content = $('.container#log');
 var gridSettings = {
-	containerWidth:  window.innerWidth +2,
+	containerWidth:  window.innerWidth <750 ? 750 : (window.innerWidth +2),
 	columnCount:     2,
 	spacing:         10
 }
@@ -10,10 +10,13 @@ var gridSettings = {
 //via: https://github.com/naturalatlas/image-layout/blob/master/examples/index.js
 function generateGrid(options, images) {
 
+	// check if previously-created div exists
+	var _photoset = document.getElementById('photoset');
+
 	// calculate positioning
 	var photoset = document.createElement('div');
-	photoset.className = 'photos';
-	// var result = layout(images, options);
+	photoset.setAttribute('id','photoset');
+	photoset.setAttribute('class','photos');
 	var result = layout_fixedPartition(images, options);
 
 	// build html
@@ -27,10 +30,21 @@ function generateGrid(options, images) {
 	photoset.style.height = result.height + 'px';
 
 	var container = document.getElementById('log');
-	container.appendChild(photoset);
+
+	if(_photoset){
+		container.replaceChild(photoset, _photoset);
+	} else{
+		container.appendChild(photoset);
+	}
+	
 }
 
 generateGrid(gridSettings, JEKYLL_POST_IMAGES);
+
+window.onresize = function(){
+	gridSettings.containerWidth = window.innerWidth <750 ? 750 : (window.innerWidth +2);
+	generateGrid(gridSettings, JEKYLL_POST_IMAGES);
+}
 
 //run everything once images are loaded
 $content.imagesLoaded({ background: '.tile' }).always(function(){
