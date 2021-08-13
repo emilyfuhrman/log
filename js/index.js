@@ -1,7 +1,7 @@
 //image container and layout parameters
 var $content = $('.container#log');
 var gridSettings = {
-	containerWidth:  window.innerWidth <750 ? 750 : (window.innerWidth +2),
+	containerWidth:  window.innerWidth <1000 ? 1000 : (window.innerWidth +2),
 	columnCount:     2,
 	spacing:         10
 }
@@ -42,7 +42,7 @@ function generateGrid(options, images) {
 generateGrid(gridSettings, JEKYLL_POST_IMAGES);
 
 window.onresize = function(){
-	gridSettings.containerWidth = window.innerWidth <750 ? 750 : (window.innerWidth +2);
+	gridSettings.containerWidth = window.innerWidth <1000 ? 1000 : (window.innerWidth +2);
 	generateGrid(gridSettings, JEKYLL_POST_IMAGES);
 }
 
