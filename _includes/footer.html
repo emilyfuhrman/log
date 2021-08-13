@@ -1,19 +1,2 @@
-	{% include loading-animation.html %}
-	<script>
-		var JEKYLL_POST_IMAGES = [];
-		{% for post in site.posts %}
-			{% for img in post.images %}
-				JEKYLL_POST_IMAGES.push({
-					post_month: "{{ post.date | date: '%m' }}",
-					post_year:  "{{ post.date | date: '%Y' }}",
-					src:        "/log/photos/{{ post.post_id }}_{{ img.ext }}",
-					width:      "{{ img.width }}",
-					height:     "{{ img.height }}",
-					meta:       "{{ img.meta }}"
-				});
-			{% endfor %}
-		{% endfor %}
-	</script>
-	<script src='/log/js/index.js'></script>
 </body>
 </html>

@@ -46,14 +46,20 @@ body {
 	@include box-sizing(border-box);
 }
 
-#nav {
+#nav,
+#_404 {
 	z-index:99;
 	position:fixed;
 	height:100px;
 	top:50%;
 	top:calc(50% - 50px);
-	left:20px;
 	@include transform(rotate(-90deg));
+	}
+#nav {
+	left:20px;
+	}
+#_404 {
+	left:-50px;
 	}
 
 #nav a {
@@ -73,6 +79,19 @@ body {
 	font-weight:bold;
 	margin-top:30px;
 	border-bottom:1px solid #fff;
+	}
+
+#_404 p,
+#_404 p a {
+	color:$color_black;
+	margin:0;
+	text-decoration:none;
+	}
+#_404 p a {
+	border-bottom:1px solid $color_black;
+	}
+#_404 p a:hover {
+	color:$color_ballet;
 	}
 
 .container#log {
