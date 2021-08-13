@@ -66,8 +66,8 @@ body {
 	color:#fff;
 	text-decoration:none;
 	}
-#nav a:hover {
-	color:$color_ballet;
+#nav a:hover .header-anno {
+	background:$color_ballet;
 	}
 
 #nav .header-anno {
@@ -91,7 +91,7 @@ body {
 	border-bottom:1px solid $color_black;
 	}
 #_404 p a:hover {
-	color:$color_ballet;
+	background:$color_ballet;
 	}
 
 .container#log {
