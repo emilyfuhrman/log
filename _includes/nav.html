@@ -3,3 +3,15 @@
 		<div id='title'>EF Log</div>
 	</a>
 </div>
+<div id='filter-container'>
+	<div id='tag-container'>
+		{% assign sorted_tags = site.tags | sort %}
+		{% for tag in sorted_tags reversed %}
+			{% assign t = tag | first %}
+			{% assign posts = tag | last %}
+			<div class="blog-tag-item" id="{{ t }}-item">
+				<a href onclick="filter('{{ t }}'); return false;">{{ t }}</a>
+			</div>
+		{% endfor %}
+	</div>
+</div>

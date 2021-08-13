@@ -5,6 +5,10 @@
 <script>
 	var JEKYLL_POST_IMAGES = [];
 	{% for post in site.posts %}
+		var post_tags = [];
+		{% for tag in post.tags %}
+			post_tags.push("{{ tag }}");
+		{% endfor %}
 		{% for img in post.images %}
 			JEKYLL_POST_IMAGES.push({
 				post_month: "{{ post.date | date: '%m' }}",
@@ -12,7 +16,8 @@
 				src:        "/log/photos/{{ post.post_id }}_{{ img.ext }}",
 				width:      "{{ img.width }}",
 				height:     "{{ img.height }}",
-				meta:       "{{ img.meta }}"
+				meta:       "{{ img.meta }}",
+				post_tags:  post_tags
 			});
 		{% endfor %}
 	{% endfor %}

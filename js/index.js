@@ -5,6 +5,8 @@ var gridSettings = {
 	columnCount:     2,
 	spacing:         10
 }
+var active_tag = null;
+var posts = JEKYLL_POST_IMAGES;
 
 //image layout logic
 //via: https://github.com/naturalatlas/image-layout/blob/master/examples/index.js
@@ -39,11 +41,56 @@ function generateGrid(options, images) {
 	
 }
 
-generateGrid(gridSettings, JEKYLL_POST_IMAGES);
+//tag logic
+//via: https://esthermakes.tech/blog/2015/03/18/filtering-posts-by-tags-with-jekyll/
+function filter(tag) {
+	event.preventDefault();
+
+	//deselect if tag is already selected
+	active_tag = active_tag == tag ? null : tag;
+
+	setActiveTag(active_tag);
+	filterPosts(active_tag);
+}
+
+function setActiveTag(_tag) {
+
+	//loop through all tag items and remove active class
+	var items = document.getElementsByClassName('blog-tag-item');
+	for(var i=0; i<items.length; i++){
+		items[i].setAttribute('class','blog-tag-item');
+	}
+
+	if(_tag){
+		//set select tag's item to active
+		var item = document.getElementById(_tag + '-item');
+		if(item){
+			item.setAttribute('class','blog-tag-item active');
+		}
+	}
+
+}
+
+//filter posts by tag
+function filterPosts(_tag) {
+	if(_tag){
+		posts = [];
+		JEKYLL_POST_IMAGES.forEach(function(d){
+			if(d.post_tags.includes(_tag)){
+				posts.push(d);
+			}
+		});
+	} else{
+		posts = JEKYLL_POST_IMAGES;
+	}
+	generateGrid(gridSettings, posts);	
+}
+
+generateGrid(gridSettings, posts);
 
 window.onresize = function(){
 	gridSettings.containerWidth = window.innerWidth <1000 ? 1000 : (window.innerWidth +2);
-	generateGrid(gridSettings, JEKYLL_POST_IMAGES);
+	generateGrid(gridSettings, posts);
 }
 
 //run everything once images are loaded
