@@ -45,7 +45,7 @@ body {
 	@include box-sizing(border-box);
 }
 
-#nav,
+#title-container,
 #_404 {
 	z-index:99;
 	position:fixed;
@@ -54,32 +54,30 @@ body {
 	top:calc(50% - 50px);
 	@include transform(rotate(-90deg));
 	}
-#nav {
+#title-container {
 	left:20px;
 	}
-#_404 {
-	left:-58px;
-	}
 
-#nav a {
+#title-container a {
 	color:#fff;
 	text-decoration:none;
 	}
-#nav a:hover .header-anno {
+
+#title-container a #title {
+	font-weight:bold;
+	text-align:center;
+	text-transform:uppercase;
+	margin-top:30px;
+	border-bottom:1px solid #fff;
+	@include box-sizing(border-box);
+	}
+#title-container a:hover #title {
 	background:$color_ballet;
 	}
 
-#nav .header-anno {
-	text-align:center;
-	text-transform:uppercase;
-	@include box-sizing(border-box);
+#_404 {
+	left:-58px;
 	}
-#nav .header-anno#title {
-	font-weight:bold;
-	margin-top:30px;
-	border-bottom:1px solid #fff;
-	}
-
 #_404 p,
 #_404 p a {
 	color:$color_black;
