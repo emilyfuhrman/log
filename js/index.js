@@ -20,7 +20,7 @@ function generateGrid(options, images) {
 	var elements = [];
 	var positions = result.positions;
 	for (var i = 0, n = positions.length; i < n; i++) {
-		elements.push('<div class="tile" style="background-image:url(' + images[i].src + ');width:' + positions[i].width + 'px;height:' + positions[i].height + 'px;left:' + positions[i].x + 'px;top:' + positions[i].y + 'px;position:absolute;"></div>');
+		elements.push('<div class="tile" style="background-image:url(' + images[i].src + ');width:' + positions[i].width + 'px;height:' + positions[i].height + 'px;left:' + positions[i].x + 'px;top:' + positions[i].y + 'px;position:absolute;"><div id="caption"><span id="meta">' + images[i].meta + '</span><span id="year">' + images[i].post_year + '</span></div></div>');
 	}
 	photoset.innerHTML = elements.join('');
 	photoset.style.width = result.width + 'px';
