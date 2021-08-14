@@ -38,6 +38,12 @@ function generateGrid(options, images) {
 	} else{
 		container.appendChild(photoset);
 	}
+
+	//run everything once images are loaded
+	$content.imagesLoaded({ background: '.tile' }).always(function(){
+		$('#loading-animation').addClass('hide').removeClass('show');
+		$content.addClass('show').removeClass('hide');
+	});
 	
 }
 
@@ -92,9 +98,3 @@ window.onresize = function(){
 	gridSettings.containerWidth = window.innerWidth <1000 ? 1000 : (window.innerWidth +2);
 	generateGrid(gridSettings, posts);
 }
-
-//run everything once images are loaded
-$content.imagesLoaded({ background: '.tile' }).always(function(){
-	$('#loading-animation').addClass('hide');
-	$content.addClass('show');
-});
