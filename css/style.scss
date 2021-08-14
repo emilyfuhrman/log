@@ -59,7 +59,7 @@ body {
 	}
 
 #title-container a {
-	color:#fff;
+	color:$color_black;
 	text-decoration:none;
 	}
 
@@ -68,7 +68,7 @@ body {
 	text-align:center;
 	text-transform:uppercase;
 	margin-top:30px;
-	border-bottom:1px solid #fff;
+	border-bottom:1px solid $color_black;
 	@include box-sizing(border-box);
 	}
 #title-container a:hover #title {
