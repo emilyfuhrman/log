@@ -118,7 +118,7 @@ body {
 	}
 
 #photoset {
-	animation: fadeIn 480ms ease-in-out;
+	/*animation: fadeIn 480ms ease-in-out;*/
 	}
 
 .tile {
@@ -175,12 +175,12 @@ body {
 	background:$color_ballet;
 	}
 
-@-webkit-keyframes fadeIn {
+/*@-webkit-keyframes fadeIn {
 	from { opacity: 0; }
 	}
 @keyframes fadeIn {
 	from { opacity: 0; }
-	}
+	}*/
 
 @media (max-width: 750px) {
 	.container#log {
