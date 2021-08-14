@@ -55,6 +55,8 @@ body {
 	@include transform(rotate(-90deg));
 	}
 #title-container {
+	visibility:visible;
+	opacity:1;
 	left:20px;
 	}
 
@@ -179,6 +181,17 @@ body {
 @keyframes fadeIn {
 	from { opacity: 0; }
 	}
+
+@media (max-width: 750px) {
+	.container#log {
+		top:0;
+	}
+
+	#filter-container {
+		visibility:hidden;
+		opacity:0;
+  }
+}
 
 /* 	====================================
 		LOADING ANIMATION
