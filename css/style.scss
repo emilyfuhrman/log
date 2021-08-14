@@ -115,6 +115,10 @@ body {
 	opacity:1;
 	}
 
+#photoset {
+	animation: fadeIn 720ms ease-in-out;
+	}
+
 .tile {
 	background-color:$color_lg;
 	background-size:cover;
@@ -167,6 +171,13 @@ body {
 	}
 #_404 p a:hover {
 	background:$color_ballet;
+	}
+
+@-webkit-keyframes fadeIn {
+	from { opacity: 0; }
+	}
+@keyframes fadeIn {
+	from { opacity: 0; }
 	}
 
 /* 	====================================
