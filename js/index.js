@@ -1,7 +1,7 @@
 //image container and layout parameters
 var $content = $('.container#log');
 var gridSettings = {
-	containerWidth:  window.innerWidth <1000 ? 1000 : window.innerWidth,
+	containerWidth:  window.innerWidth <1000 ? 1000 : (window.innerWidth +2),
 	columnCount:     2,
 	spacing:         10
 }
