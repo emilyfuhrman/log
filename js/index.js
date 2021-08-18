@@ -1,7 +1,7 @@
 //image container and layout parameters
 var $content = $('.container#log');
 var gridSettings = {
-	containerWidth:  window.innerWidth <1000 ? 1000 : (window.innerWidth +2),
+	containerWidth:  window.innerWidth <1000 ? 1000 : window.innerWidth,
 	columnCount:     2,
 	spacing:         10
 }
@@ -41,7 +41,7 @@ function generateGrid(options, images) {
 
 	//run everything once images are loaded
 	$content.imagesLoaded({ background: '.tile' }).always(function(){
-		$('#loading-animation').addClass('hide').removeClass('show');
+		$('#loading-animation').addClass('hide');
 		$content.addClass('show').removeClass('hide');
 	});
 	
@@ -54,6 +54,10 @@ function filter(tag) {
 
 	//deselect if tag is already selected
 	active_tag = active_tag == tag ? null : tag;
+
+	//prepare for refresh
+	$content.addClass('hide').removeClass('show');
+	$('#loading-animation').removeClass('hide');
 
 	setActiveTag(active_tag);
 	filterPosts(active_tag);
