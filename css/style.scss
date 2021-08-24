@@ -112,14 +112,11 @@ body {
 	position:relative;
 	width:100%;
 	top:120px;
+	-webkit-transform: translate3d(0, 0, 0);
 	@include transition(opacity 240ms ease);
 	}
 .container#log.show {
 	opacity:1;
-	}
-
-#photoset {
-	/*animation: fadeIn 480ms ease-in-out;*/
 	}
 
 .tile {
@@ -128,9 +125,6 @@ body {
 	background-size:cover;
 	background-position:center;
 	background-repeat:no-repeat;
-	-webkit-transform: translate3d(0, 0, 0);
-	-webkit-backface-visibility: hidden;
-	/*@include transition(opacity 480ms ease);*/
 	}
 
 .tile #caption {

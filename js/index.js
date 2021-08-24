@@ -10,6 +10,7 @@ var generate = function(){
 			columnCount:2,
 			spacing:10
 		},
+		media_cutoff:750,
 
 		c_jq:$('.container#log'),
 		c:d3.select('.container#log'),
@@ -76,6 +77,7 @@ var generate = function(){
 					function(enter){
 						return enter.append('div')
 							.classed('tile',true)
+							.style('opacity',0)
 							.style('width',function(d,i){ return d.width +'px'; })
 							.style('height',function(d,i){ return d.height +'px'; })
 							.style('left',function(d,i){ return d.x +'px'; })
@@ -97,7 +99,9 @@ var generate = function(){
 							.html(function(d,i){
 								return '<div id="caption"><span id="meta">' +_posts[i].meta +'</span><span id="year">' +_posts[i].post_year +'</span></div>'
 							})
-							.transition().duration(480)
+							.transition()
+							.duration(360)
+     					.ease(d3.easeLinear)
 							.style('opacity',1);
 					}
 				);
