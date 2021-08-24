@@ -1,104 +1,139 @@
-//image container and layout parameters
-var $content = $('.container#log');
-var gridSettings = {
-	containerWidth:  window.innerWidth <1000 ? 1000 : (window.innerWidth +2),
-	columnCount:     2,
-	spacing:         10
-}
-var active_tag = null;
-var posts = JEKYLL_POST_IMAGES;
+var generate = function(){
 
-//image layout logic
-//via: https://github.com/naturalatlas/image-layout/blob/master/examples/index.js
-function generateGrid(options, images) {
+	return {
+		posts:JEKYLL_POST_IMAGES,
+		post_tags:[],
+		active_tag:null,
 
-	// check if previously-created div exists
-	var _photoset = document.getElementById('photoset');
+		grid_settings:{
+			containerWidth:window.innerWidth <1000 ? 1000 : (window.innerWidth +2),
+			columnCount:2,
+			spacing:10
+		},
 
-	// calculate positioning
-	var photoset = document.createElement('div');
-	photoset.setAttribute('id','photoset');
-	photoset.setAttribute('class','photos');
-	var result = layout_fixedPartition(images, options);
+		c_jq:$('.container#log'),
+		c:d3.select('.container#log'),
+		l:d3.select('#loading-animation'),
 
-	// build html
-	var elements = [];
-	var positions = result.positions;
-	for (var i = 0, n = positions.length; i < n; i++) {
-		elements.push('<div class="tile" style="background-image:url(' + images[i].src + ');width:' + positions[i].width + 'px;height:' + positions[i].height + 'px;left:' + positions[i].x + 'px;top:' + positions[i].y + 'px;position:absolute;"><div id="caption"><span id="meta">' + images[i].meta + '</span><span id="year">' + images[i].post_year + '</span></div></div>');
-	}
-	photoset.innerHTML = elements.join('');
-	photoset.style.width = result.width + 'px';
-	photoset.style.height = result.height + 'px';
+		hideGrid:function(){
+			vis.l.classed('hide',false);
+			vis.c.classed('hide',true).classed('show',false);
+		},
+		showGrid:function(){
+			vis.l.classed('hide',true);
+			vis.c.classed('hide',false).classed('show',true);
+		},
 
-	var container = document.getElementById('log');
+		//generate UI
+		setup:function(){
 
-	if(_photoset){
-		container.replaceChild(photoset, _photoset);
-	} else{
-		container.appendChild(photoset);
-	}
+			vis.posts.forEach(function(d,i){
+				d.post_tags.forEach(function(_d,_i){
+					if(vis.post_tags.indexOf(_d) <0){
+						vis.post_tags.push(_d);
+					}
+				});
+			});
+			vis.post_tags.sort().reverse();
 
-	//run everything once images are loaded
-	$content.imagesLoaded({ background: '.tile' }).always(function(){
-		$('#loading-animation').addClass('hide');
-		$content.addClass('show').removeClass('hide');
-	});
-	
-}
+			d3.select('#tag-container')
+				.selectAll('div.blog-tag-item')
+				.data(vis.post_tags)
+				.join(
+					function(enter){
+						return enter.append('div')
+							.classed('blog-tag-item',true)
+							.append('a')
+								.text(function(d){ return d; })
+							.on('click',function(d){
+								var t = this.__data__,
+										p = d3.select(this.parentNode);
 
-//tag logic
-//via: https://esthermakes.tech/blog/2015/03/18/filtering-posts-by-tags-with-jekyll/
-function filter(tag) {
-	event.preventDefault();
+								vis.setTag(t,p);
+								vis.filterPosts();
+							});
+					}
+				);
+		},
 
-	//deselect if tag is already selected
-	active_tag = active_tag == tag ? null : tag;
+		//grid layout logic
+		//SOURCE: https://github.com/naturalatlas/image-layout/blob/master/examples/index.js
+		generateGridDimensions:function(_options, _posts){
+			var result = layout_fixedPartition(_posts, _options);
+			var positions = result.positions;
 
-	//prepare for refresh
-	$content.addClass('hide').removeClass('show');
-	$('#loading-animation').removeClass('hide');
+			vis.generateGrid(positions, _posts);
+		},
 
-	setActiveTag(active_tag);
-	filterPosts(active_tag);
-}
+		//D3.js update function
+		generateGrid:function(_data, _posts){
 
-function setActiveTag(_tag) {
+			vis.hideGrid();
+			
+			vis.c
+				.selectAll('div.tile')
+				.data(_data)
+				.join(
+					function(enter){
+						return enter.append('div')
+							.classed('tile',true)
+							.style('width',function(d,i){ return d.width +'px'; })
+							.style('height',function(d,i){ return d.height +'px'; })
+							.style('left',function(d,i){ return d.x +'px'; })
+							.style('top',function(d,i){ return d.y +'px'; })
+							.style('background-image',function(d,i){ return 'url("' +_posts[i].src +'")'; })
+							.html(function(d,i){
+								return '<div id="caption"><span id="meta">' +_posts[i].meta +'</span><span id="year">' +_posts[i].post_year +'</span></div>'
+							});
+					},
+					function(update){
+						return update
+							.classed('tile',true)
+							.style('width',function(d,i){ return d.width +'px'; })
+							.style('height',function(d,i){ return d.height +'px'; })
+							.style('left',function(d,i){ return d.x +'px'; })
+							.style('top',function(d,i){ return d.y +'px'; })
+							.style('background-image',function(d,i){ return 'url("' +_posts[i].src +'")'; })
+							.html(function(d,i){
+								return '<div id="caption"><span id="meta">' +_posts[i].meta +'</span><span id="year">' +_posts[i].post_year +'</span></div>'
+							});
+					}
+				);
 
-	//loop through all tag items and remove active class
-	var items = document.getElementsByClassName('blog-tag-item');
-	for(var i=0; i<items.length; i++){
-		items[i].setAttribute('class','blog-tag-item');
-	}
+				vis.c_jq.imagesLoaded({ background: '.tile' }).always(function(){
+					vis.showGrid();
+				});
+		},
 
-	if(_tag){
-		//set select tag's item to active
-		var item = document.getElementById(_tag + '-item');
-		if(item){
-			item.setAttribute('class','blog-tag-item active');
+		//tag logic
+		setTag:function(_tag, _parent){
+
+			//if clicked tag is current tag
+			if(vis.active_tag && (vis.active_tag == _tag)){
+				vis.active_tag = null;
+
+			//if clicked tag is new tag
+			} else if(vis.active_tag && (vis.active_tag != _tag)){
+				vis.active_tag = _tag;
+			}
+
+			//if no previous tag
+			else {
+				vis.active_tag = _tag;
+			}
+			
+			d3.selectAll('.blog-tag-item').classed('active',function(d){ return d === vis.active_tag; });
+		},
+
+		filterPosts:function(){
+			var filtered_posts = vis.posts.filter(function(d){
+				return vis.active_tag ? d.post_tags.indexOf(vis.active_tag) >=0 : vis.posts;
+			});
+			vis.generateGridDimensions(vis.grid_settings, filtered_posts);
 		}
 	}
-
 }
 
-//filter posts by tag
-function filterPosts(_tag) {
-	if(_tag){
-		posts = [];
-		JEKYLL_POST_IMAGES.forEach(function(d){
-			if(d.post_tags.includes(_tag)){
-				posts.push(d);
-			}
-		});
-	} else{
-		posts = JEKYLL_POST_IMAGES;
-	}
-	generateGrid(gridSettings, posts);	
-}
-
-generateGrid(gridSettings, posts);
-
-window.onresize = function(){
-	gridSettings.containerWidth = window.innerWidth <1000 ? 1000 : (window.innerWidth +2);
-	generateGrid(gridSettings, posts);
-}
+var vis = generate();
+vis.setup();
+vis.generateGridDimensions(vis.grid_settings, vis.posts);

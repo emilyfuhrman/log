@@ -93,6 +93,7 @@ body {
 	margin-top:40px;
 	}
 #filter-container #tag-container .blog-tag-item a {
+	cursor:pointer;
 	color:$color_black;
 	font-size:0.55rem;
 	text-transform:uppercase;
@@ -122,6 +123,7 @@ body {
 	}
 
 .tile {
+	position:absolute;
 	background-color:$color_lg;
 	background-size:cover;
 	background-position:center;
