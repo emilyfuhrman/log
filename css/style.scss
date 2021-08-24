@@ -112,6 +112,7 @@ body {
 	position:relative;
 	width:100%;
 	top:120px;
+	-webkit-transform: translate3d(0, 0, 0);
 	@include transition(opacity 240ms ease);
 	}
 .container#log.show {
