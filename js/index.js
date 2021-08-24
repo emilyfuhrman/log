@@ -46,6 +46,7 @@ var generate = function(){
 							.append('a')
 								.text(function(d){ return d; })
 							.on('click',function(d){
+								
 								var t = this.__data__,
 										p = d3.select(this.parentNode);
 
@@ -67,8 +68,6 @@ var generate = function(){
 
 		//D3.js update function
 		generateGrid:function(_data, _posts){
-
-			vis.hideGrid();
 			
 			vis.c
 				.selectAll('div.tile')
@@ -89,6 +88,7 @@ var generate = function(){
 					function(update){
 						return update
 							.classed('tile',true)
+							.style('opacity',0)
 							.style('width',function(d,i){ return d.width +'px'; })
 							.style('height',function(d,i){ return d.height +'px'; })
 							.style('left',function(d,i){ return d.x +'px'; })
@@ -96,7 +96,9 @@ var generate = function(){
 							.style('background-image',function(d,i){ return 'url("' +_posts[i].src +'")'; })
 							.html(function(d,i){
 								return '<div id="caption"><span id="meta">' +_posts[i].meta +'</span><span id="year">' +_posts[i].post_year +'</span></div>'
-							});
+							})
+							.transition().duration(480)
+							.style('opacity',1);
 					}
 				);
 

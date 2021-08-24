@@ -130,6 +130,7 @@ body {
 	background-repeat:no-repeat;
 	-webkit-transform: translate3d(0, 0, 0);
 	-webkit-backface-visibility: hidden;
+	/*@include transition(opacity 480ms ease);*/
 	}
 
 .tile #caption {
