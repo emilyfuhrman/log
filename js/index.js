@@ -5,12 +5,12 @@ var generate = function(){
 		post_tags:[],
 		active_tag:null,
 
+		media_cutoff:750,
 		grid_settings:{
-			containerWidth:window.innerWidth <1000 ? 1000 : (window.innerWidth +2),
+			containerWidth:window.innerWidth <this.media_cutoff ? this.media_cutoff : (window.innerWidth +2),
 			columnCount:2,
 			spacing:10
 		},
-		media_cutoff:750,
 
 		c_jq:$('.container#log'),
 		c:d3.select('.container#log'),
@@ -77,9 +77,8 @@ var generate = function(){
 					function(enter){
 						return enter.append('div')
 							.classed('tile',true)
-							.style('opacity',0)
 							.style('width',function(d,i){ return d.width +'px'; })
-							.style('height',function(d,i){ return d.height +'px'; })
+							.style('height',function(d,i){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(_posts[i].height)/parseInt(_posts[i].width))*window.innerWidth) +'px'; })
 							.style('left',function(d,i){ return d.x +'px'; })
 							.style('top',function(d,i){ return d.y +'px'; })
 							.style('background-image',function(d,i){ return 'url("' +_posts[i].src +'")'; })
@@ -92,7 +91,7 @@ var generate = function(){
 							.classed('tile',true)
 							.style('opacity',0)
 							.style('width',function(d,i){ return d.width +'px'; })
-							.style('height',function(d,i){ return d.height +'px'; })
+							.style('height',function(d,i){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(_posts[i].height)/parseInt(_posts[i].width))*window.innerWidth) +'px'; })
 							.style('left',function(d,i){ return d.x +'px'; })
 							.style('top',function(d,i){ return d.y +'px'; })
 							.style('background-image',function(d,i){ return 'url("' +_posts[i].src +'")'; })
@@ -143,3 +142,8 @@ var generate = function(){
 var vis = generate();
 vis.setup();
 vis.generateGridDimensions(vis.grid_settings, vis.posts);
+
+window.onresize = function(){
+	vis.grid_settings.containerWidth = window.innerWidth <vis.media_cutoff ? vis.media_cutoff : (window.innerWidth +2);
+	vis.generateGridDimensions(vis.grid_settings, vis.posts);
+}
