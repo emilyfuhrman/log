@@ -71,7 +71,6 @@ var generate = function(){
 		generateGrid:function(_data, _posts){
 			
 			var tiles,
-					tile_thumbs,
 					tile_captions;
 
 			_data.forEach(function(d,i){
