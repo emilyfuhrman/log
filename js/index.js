@@ -71,6 +71,7 @@ var generate = function(){
 		generateGrid:function(_data, _posts){
 			
 			var tiles,
+					tile_thumbs,
 					tile_captions;
 
 			_data.forEach(function(d,i){
@@ -106,7 +107,8 @@ var generate = function(){
 					}
 				);
 
-				tile_captions = tiles.selectAll('div.caption')
+				tile_captions = tiles
+					.selectAll('div.caption')
 					.data(function(d){ return [d]; })
 					.join(
 						function(enter){
