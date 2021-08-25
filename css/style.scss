@@ -85,12 +85,12 @@ body {
 
 #filter-container #tag-container {
 	float:right;
-	margin-right:30px;
+	margin-right:50px;
 	}
 
 #filter-container #tag-container .blog-tag-item {
 	float:right;
-	margin-top:40px;
+	margin-top:30px;
 	}
 #filter-container #tag-container .blog-tag-item a {
 	cursor:pointer;
@@ -111,7 +111,7 @@ body {
 	opacity:0;
 	position:relative;
 	width:100%;
-	top:180px;
+	top:150px;
 	-webkit-transform: translate3d(0, 0, 0);
 	@include transition(opacity 240ms ease);
 	}
