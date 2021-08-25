@@ -128,7 +128,7 @@ body {
 	-webkit-transform: translate3d(0, 0, 0);
 	}
 
-.tile #caption {
+.tile .caption {
 	cursor:default;
 	position:absolute;
 	opacity:0;
@@ -136,22 +136,22 @@ body {
 	height:1.2rem;
 	bottom:10px;
 	}
-.tile:hover #caption {
+.tile:hover .caption {
 	opacity:1;
 	}
 
-.tile #caption span {
+.tile .caption span {
 	position:absolute;
 	color:$color_lg;
 	font-size:0.65rem;
 	line-height:1.2em;
 	bottom:0;
 	}
-.tile #caption span#meta {
+.tile .caption span.meta {
 	max-width:50%;
 	left:30px;
 	}
-.tile #caption span#year {
+.tile .caption span.year {
 	max-width:50%;
 	right:30px;
 	}

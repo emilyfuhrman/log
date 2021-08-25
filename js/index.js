@@ -70,40 +70,59 @@ var generate = function(){
 		//D3.js update function
 		generateGrid:function(_data, _posts){
 			
-			vis.c
+			var tiles,
+					tile_captions;
+
+			_data.forEach(function(d,i){
+				d.post = _posts[i];
+			});
+
+			tiles = vis.c
 				.selectAll('div.tile')
 				.data(_data)
 				.join(
 					function(enter){
 						return enter.append('div')
 							.classed('tile',true)
-							.style('width',function(d,i){ return d.width +'px'; })
-							.style('height',function(d,i){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(_posts[i].height)/parseInt(_posts[i].width))*window.innerWidth) +'px'; })
-							.style('left',function(d,i){ return d.x +'px'; })
-							.style('top',function(d,i){ return d.y +'px'; })
-							.style('background-image',function(d,i){ return 'url("' +_posts[i].src +'")'; })
-							.html(function(d,i){
-								return '<div id="caption"><span id="meta">' +_posts[i].meta +'</span><span id="year">' +_posts[i].post_year +'</span></div>'
-							});
+							.style('width',function(d){ return d.width +'px'; })
+							.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.post.height)/parseInt(d.post.width))*window.innerWidth) +'px'; })
+							.style('left',function(d){ return d.x +'px'; })
+							.style('top',function(d){ return d.y +'px'; })
+							.style('background-image',function(d){ return 'url("' +d.post.src +'")'; })
+							;
 					},
 					function(update){
 						return update
-							.classed('tile',true)
 							.style('opacity',0)
-							.style('width',function(d,i){ return d.width +'px'; })
-							.style('height',function(d,i){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(_posts[i].height)/parseInt(_posts[i].width))*window.innerWidth) +'px'; })
-							.style('left',function(d,i){ return d.x +'px'; })
-							.style('top',function(d,i){ return d.y +'px'; })
-							.style('background-image',function(d,i){ return 'url("' +_posts[i].src +'")'; })
-							.html(function(d,i){
-								return '<div id="caption"><span id="meta">' +_posts[i].meta +'</span><span id="year">' +_posts[i].post_year +'</span></div>'
-							})
+							.style('width',function(d){ return d.width +'px'; })
+							.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.post.height)/parseInt(d.post.width))*window.innerWidth) +'px'; })
+							.style('left',function(d){ return d.x +'px'; })
+							.style('top',function(d){ return d.y +'px'; })
+							.style('background-image',function(d){ return 'url("' +d.post.src +'")'; })
 							.transition()
 							.duration(360)
      					.ease(d3.easeLinear)
 							.style('opacity',1);
 					}
 				);
+
+				tile_captions = tiles.selectAll('div.caption')
+					.data(function(d){ return [d]; })
+					.join(
+						function(enter){
+							return enter.append('div')
+								.classed('caption',true)
+								.html(function(d){ 
+									return '<span class="meta">' +d.post.meta +'</span><span class="year">' +d.post.post_year +'</span>';
+								});
+						},
+						function(update){
+							return update
+								.html(function(d){ 
+									return '<span class="meta">' +d.post.meta +'</span><span class="year">' +d.post.post_year +'</span>';
+								});
+						}
+					);
 
 				vis.c_jq.imagesLoaded({ background: '.tile' }).always(function(){
 					vis.showGrid();
