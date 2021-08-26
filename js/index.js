@@ -9,7 +9,7 @@ var generate = function(){
 		grid_settings:{
 			containerWidth:window.innerWidth <this.media_cutoff ? this.media_cutoff : (window.innerWidth +2),
 			idealElementHeight:550,
-			spacing:10
+			spacing:20
 		},
 
 		c_jq:$('.container#log'),
