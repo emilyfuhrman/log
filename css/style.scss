@@ -87,14 +87,10 @@ body {
 	padding:0;
 	@include box-sizing(border-box);
 	}
-#title-container a #title {
-	/*font-weight:bold;*/
-	}
 #filter-container #tag-container .blog-tag-item a {
 	float:right;
 	/*border-left:1px solid $color_black;*/
 	}
-/*#title-container a:hover #title,*/
 #filter-container #tag-container .blog-tag-item a:hover,
 #filter-container #tag-container .blog-tag-item.active a {
 	background:$color_ballet;
