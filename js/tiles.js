@@ -72,19 +72,21 @@ var generate = function(){
 			
 			var tiles,
 					tile_captions;
+			var elem = _posts[0].elem_type;
+			var elem_selector = elem +'.tile';
 
 			_data.forEach(function(d,i){
 				d.post = _posts[i];
 			});
 
 			tiles = vis.c
-				.selectAll('a.tile')
+				.selectAll(elem_selector)
 				.data(_data)
 				.join(
 					function(enter){
-						return enter.append('a')
+						return enter.append(elem)
 							.classed('tile',true)
-							.attr('href',function(d){ return d.post.post_url; })
+							.attr('href',function(d){ return d.post.post_url || false; })
 							.style('width',function(d){ return d.width +'px'; })
 							.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.post.height)/parseInt(d.post.width))*window.innerWidth) +'px'; })
 							.style('left',function(d){ return d.x +'px'; })
