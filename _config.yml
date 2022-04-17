@@ -12,7 +12,7 @@ defaults:
     values:
       category: entries
       layout: post
-      permalink: /:categories/:year/:title:output_ext
+      permalink: /:categories/:year/:month/:title:output_ext
 
 # formatting
 sass:

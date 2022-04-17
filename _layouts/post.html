@@ -1,3 +1,7 @@
 {% include header.html %}
- {{ content }}
+{% include nav.html %}
+<div id="log" class="container"></div>
+{% include loading-animation.html %}
+{% include tiles.html %}
+<script src='/log/js/tiles.js'></script>
 {% include footer.html %}

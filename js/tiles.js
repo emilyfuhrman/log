@@ -1,7 +1,7 @@
 var generate = function(){
 
 	return {
-		posts:JEKYLL_POST_IMAGES,
+		posts:JEKYLL_ARRAY,
 		post_tags:[],
 		active_tag:null,
 
@@ -9,7 +9,7 @@ var generate = function(){
 		grid_settings:{
 			containerWidth:window.innerWidth <this.media_cutoff ? this.media_cutoff : (window.innerWidth +2),
 			idealElementHeight:550,
-			spacing:20
+			spacing:1
 		},
 
 		c_jq:$('.container#log'),
@@ -78,27 +78,29 @@ var generate = function(){
 			});
 
 			tiles = vis.c
-				.selectAll('div.tile')
+				.selectAll('a.tile')
 				.data(_data)
 				.join(
 					function(enter){
-						return enter.append('div')
+						return enter.append('a')
 							.classed('tile',true)
+							.attr('href',function(d){ return d.post.post_url; })
 							.style('width',function(d){ return d.width +'px'; })
 							.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.post.height)/parseInt(d.post.width))*window.innerWidth) +'px'; })
 							.style('left',function(d){ return d.x +'px'; })
 							.style('top',function(d){ return d.y +'px'; })
-							.style('background-image',function(d){ return 'url("' +d.post.src +'")'; })
+							.style('background-image',function(d){ return 'url("' +d.post.cover_src +'")'; })
 							;
 					},
 					function(update){
 						return update
+							.attr('href',function(d){ return d.post.post_url; })
 							.style('opacity',0)
 							.style('width',function(d){ return d.width +'px'; })
 							.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.post.height)/parseInt(d.post.width))*window.innerWidth) +'px'; })
 							.style('left',function(d){ return d.x +'px'; })
 							.style('top',function(d){ return d.y +'px'; })
-							.style('background-image',function(d){ return 'url("' +d.post.src +'")'; })
+							.style('background-image',function(d){ return 'url("' +d.post.cover_src +'")'; })
 							.transition()
 							.duration(360)
      					.ease(d3.easeLinear)
