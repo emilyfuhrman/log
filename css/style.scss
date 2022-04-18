@@ -82,23 +82,25 @@ body {
 	text-transform:uppercase;
 	text-decoration:none;
 	line-height:50px;
-	width:120px;
+	width:140px;
 	margin:0;
 	padding:0;
 	@include box-sizing(border-box);
 	}
 #filter-container #tag-container .blog-tag-item a {
 	float:right;
-	/*border-left:1px solid $color_black;*/
 	}
 #filter-container #tag-container .blog-tag-item a:hover,
 #filter-container #tag-container .blog-tag-item.active a {
 	background:$color_ballet;
 	}
+#title-container a #title,
+#filter-container #tag-container .blog-tag-item.no-click a {
+	width:auto;
+	margin:0 40px;
+	}
 #filter-container #tag-container .blog-tag-item.no-click a {
 	pointer-events:none;
-	width:auto;
-	margin:0 30px;
 	}
 
 .container#log {
