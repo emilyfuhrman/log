@@ -24,7 +24,7 @@
 			{% endfor %}
 		{% endfor %}
 	{% else %}
-		var tags = ["{{ page.cover_meta }} ({{ page.date | date: '%Y' }})"];
+		var tags = ["{{ page.cover_meta }}&nbsp;&#9697;&nbsp;{{ page.date | date: '%Y' }}"];
 		{% for img in page.images %}
 			JEKYLL_ARRAY.push({
 					type:  			"post",

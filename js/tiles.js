@@ -46,7 +46,7 @@ var generate = function(){
 							.classed('blog-tag-item',true)
 							.classed('no-click',function(d){ return vis.tiles[0].type !== 'index'; })
 							.append('a')
-								.text(function(d){ return d; })
+								.html(function(d){ return d; })
 							.on('click',function(d){
 								
 								var t = this.__data__,
