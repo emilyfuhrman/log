@@ -10,7 +10,7 @@
 				{% assign i = post.cover_idx | plus:1 %}
 				{% if forloop.index == i %}
 					JEKYLL_ARRAY.push({
-						elem_type:  "a",
+						type:       "index",
 						post_month: "{{ post.date | date: '%m' }}",
 						post_year:  "{{ post.date | date: '%Y' }}",
 						post_url:   "{{ site.baseurl }}{{ post.url }}",
@@ -24,10 +24,10 @@
 			{% endfor %}
 		{% endfor %}
 	{% else %}
-		var post_tags = [];
+		var post_tags = ["{{ page.cover_meta }}"];
 		{% for img in page.images %}
 			JEKYLL_ARRAY.push({
-					elem_type:  "div",
+					type:  			"post",
 					post_month: "{{ page.date | date: '%m' }}",
 					post_year:  "{{ page.date | date: '%Y' }}",
 					post_url:   "{{ site.baseurl }}{{ page.url }}",

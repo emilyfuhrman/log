@@ -95,6 +95,11 @@ body {
 #filter-container #tag-container .blog-tag-item.active a {
 	background:$color_ballet;
 	}
+#filter-container #tag-container .blog-tag-item.no-click a {
+	pointer-events:none;
+	width:auto;
+	margin:0 30px;
+	}
 
 .container#log {
 	opacity:0;

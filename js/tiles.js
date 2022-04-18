@@ -44,6 +44,7 @@ var generate = function(){
 					function(enter){
 						return enter.append('div')
 							.classed('blog-tag-item',true)
+							.classed('no-click',function(d){ return vis.posts[0].type !== 'index'; })
 							.append('a')
 								.text(function(d){ return d; })
 							.on('click',function(d){
@@ -72,7 +73,7 @@ var generate = function(){
 			
 			var tiles,
 					tile_captions;
-			var elem = _posts[0].elem_type;
+			var elem = _posts[0].type === 'index' ? 'a' : 'div';
 			var elem_selector = elem +'.tile';
 
 			_data.forEach(function(d,i){
