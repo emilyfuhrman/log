@@ -140,27 +140,26 @@ body {
 	line-height:1.2em;
 	bottom:0;
 	}
-.tile .caption span.meta {
+.tile .caption span.meta.left {
 	max-width:50%;
 	left:50px;
 	}
-.tile .caption span.year {
+.tile .caption span.meta.right {
 	max-width:50%;
 	right:50px;
 	}
 
-#_404 {
-	left:-68px;
-	}
 #_404 p,
 #_404 p a {
-	color:$color_black;
-	margin:0;
+	color:$color_lg;
+	font-size:0.75rem;
+	text-align:center;
+	margin-top:120px;
 	text-decoration:none;
 	}
 #_404 p a {
-	padding-bottom:5px;
-	border-bottom:1px solid $color_black;
+	padding-bottom:1px;
+	border-bottom:1px solid $color_lg;
 	}
 #_404 p a:hover {
 	background:$color_ballet;

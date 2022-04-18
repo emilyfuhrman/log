@@ -1,8 +1,8 @@
 var generate = function(){
 
 	return {
-		posts:JEKYLL_ARRAY,
-		post_tags:[],
+		tiles:JEKYLL_ARRAY,
+		tags:[],
 		active_tag:null,
 
 		media_cutoff:750,
@@ -28,23 +28,23 @@ var generate = function(){
 		//generate UI
 		setup:function(){
 
-			vis.posts.forEach(function(d,i){
-				d.post_tags.forEach(function(_d,_i){
-					if(vis.post_tags.indexOf(_d) <0){
-						vis.post_tags.push(_d);
+			vis.tiles.forEach(function(d,i){
+				d.tags.forEach(function(_d,_i){
+					if(vis.tags.indexOf(_d) <0){
+						vis.tags.push(_d);
 					}
 				});
 			});
-			vis.post_tags.sort().reverse();
+			vis.tags.sort().reverse();
 
 			d3.select('#tag-container')
 				.selectAll('div.blog-tag-item')
-				.data(vis.post_tags)
+				.data(vis.tags)
 				.join(
 					function(enter){
 						return enter.append('div')
 							.classed('blog-tag-item',true)
-							.classed('no-click',function(d){ return vis.posts[0].type !== 'index'; })
+							.classed('no-click',function(d){ return vis.tiles[0].type !== 'index'; })
 							.append('a')
 								.text(function(d){ return d; })
 							.on('click',function(d){
@@ -53,7 +53,7 @@ var generate = function(){
 										p = d3.select(this.parentNode);
 
 								vis.setTag(t,p);
-								vis.filterPosts();
+								vis.filterTiles();
 							});
 					}
 				);
@@ -61,23 +61,23 @@ var generate = function(){
 
 		//grid layout logic
 		//SOURCE: https://github.com/naturalatlas/image-layout/blob/master/examples/index.js
-		generateGridDimensions:function(_options, _posts){
-			var result = layout_fixedPartition(_posts, _options);
+		generateGridDimensions:function(_options, _tiles){
+			var result = layout_fixedPartition(_tiles, _options);
 			var positions = result.positions;
 
-			vis.generateGrid(positions, _posts);
+			vis.generateGrid(positions, _tiles);
 		},
 
 		//D3.js update function
-		generateGrid:function(_data, _posts){
+		generateGrid:function(_data, _tiles){
 			
 			var tiles,
 					tile_captions;
-			var elem = _posts[0].type === 'index' ? 'a' : 'div';
+			var elem = _tiles[0].type === 'index' ? 'a' : 'div';
 			var elem_selector = elem +'.tile';
 
 			_data.forEach(function(d,i){
-				d.post = _posts[i];
+				d.tile = _tiles[i];
 			});
 
 			tiles = vis.c
@@ -87,23 +87,23 @@ var generate = function(){
 					function(enter){
 						return enter.append(elem)
 							.classed('tile',true)
-							.attr('href',function(d){ return d.post.post_url || false; })
+							.attr('href',function(d){ return d.tile.url || null; })
 							.style('width',function(d){ return d.width +'px'; })
-							.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.post.height)/parseInt(d.post.width))*window.innerWidth) +'px'; })
+							.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.tile.height)/parseInt(d.tile.width))*window.innerWidth) +'px'; })
 							.style('left',function(d){ return d.x +'px'; })
 							.style('top',function(d){ return d.y +'px'; })
-							.style('background-image',function(d){ return 'url("' +d.post.cover_src +'")'; })
+							.style('background-image',function(d){ return 'url("' +d.tile.img_src +'")'; })
 							;
 					},
 					function(update){
 						return update
-							.attr('href',function(d){ return d.post.post_url; })
+							.attr('href',function(d){ return d.tile.url; })
 							.style('opacity',0)
 							.style('width',function(d){ return d.width +'px'; })
-							.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.post.height)/parseInt(d.post.width))*window.innerWidth) +'px'; })
+							.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.tile.height)/parseInt(d.tile.width))*window.innerWidth) +'px'; })
 							.style('left',function(d){ return d.x +'px'; })
 							.style('top',function(d){ return d.y +'px'; })
-							.style('background-image',function(d){ return 'url("' +d.post.cover_src +'")'; })
+							.style('background-image',function(d){ return 'url("' +d.tile.img_src +'")'; })
 							.transition()
 							.duration(360)
      					.ease(d3.easeLinear)
@@ -119,13 +119,13 @@ var generate = function(){
 							return enter.append('div')
 								.classed('caption',true)
 								.html(function(d){ 
-									return '<span class="meta">' +d.post.meta +'</span><span class="year">' +d.post.post_year +'</span>';
+									return '<span class="meta left">' +(d.tile.meta || '') +'</span><span class="meta right">' +(d.tile.tile_year || '') +'</span>';
 								});
 						},
 						function(update){
 							return update
 								.html(function(d){ 
-									return '<span class="meta">' +d.post.meta +'</span><span class="year">' +d.post.post_year +'</span>';
+									return '<span class="meta left">' +(d.tile.meta || '') +'</span><span class="meta right">' +(d.tile.tile_year || '') +'</span>';
 								});
 						}
 					);
@@ -155,20 +155,20 @@ var generate = function(){
 			d3.selectAll('.blog-tag-item').classed('active',function(d){ return d === vis.active_tag; });
 		},
 
-		filterPosts:function(){
-			var filtered_posts = vis.posts.filter(function(d){
-				return vis.active_tag ? d.post_tags.indexOf(vis.active_tag) >=0 : vis.posts;
+		filterTiles:function(){
+			var filtered_tiles = vis.tiles.filter(function(d){
+				return vis.active_tag ? d.tags.indexOf(vis.active_tag) >=0 : vis.tiles;
 			});
-			vis.generateGridDimensions(vis.grid_settings, filtered_posts);
+			vis.generateGridDimensions(vis.grid_settings, filtered_tiles);
 		}
 	}
 }
 
 var vis = generate();
 vis.setup();
-vis.generateGridDimensions(vis.grid_settings, vis.posts);
+vis.generateGridDimensions(vis.grid_settings, vis.tiles);
 
 window.onresize = function(){
 	vis.grid_settings.containerWidth = window.innerWidth <vis.media_cutoff ? vis.media_cutoff : (window.innerWidth +2);
-	vis.generateGridDimensions(vis.grid_settings, vis.posts);
+	vis.generateGridDimensions(vis.grid_settings, vis.tiles);
 }
