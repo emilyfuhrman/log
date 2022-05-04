@@ -119,13 +119,15 @@ var generate = function(){
 							return enter.append('div')
 								.classed('caption',true)
 								.html(function(d){ 
-									return '<span class="meta left">' +(d.tile.meta || '') +'</span><span class="meta right">' +(d.tile.tile_year || '') +'</span>';
+									var content_r = d.tile.tile_year ? d.tile.tile_year +'&middot;' +d.tile.tile_month : '';
+									return '<span class="meta left">' +(d.tile.meta || '') +'</span><span class="meta right">' +content_r +'</span>';
 								});
 						},
 						function(update){
 							return update
 								.html(function(d){ 
-									return '<span class="meta left">' +(d.tile.meta || '') +'</span><span class="meta right">' +(d.tile.tile_year || '') +'</span>';
+									var content_r = d.tile.tile_year ? d.tile.tile_year +'&middot;' +d.tile.tile_month : '';
+									return '<span class="meta left">' +(d.tile.meta || '') +'</span><span class="meta right">' +content_r +'</span>';
 								});
 						}
 					);
