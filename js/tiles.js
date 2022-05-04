@@ -8,7 +8,7 @@ var generate = function(){
 		media_cutoff:750,
 		grid_settings:{
 			containerWidth:window.innerWidth <this.media_cutoff ? this.media_cutoff : (window.innerWidth +2),
-			idealElementHeight:550,
+			idealElementHeight:500,
 			spacing:1
 		},
 
