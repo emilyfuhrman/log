@@ -56,15 +56,15 @@ body {
 	text-decoration:none;
 	}
 #title-container a #title {
+	color:#fff;
 	width:auto;
 	margin:0 40px;
 	}
 
 .container#log {
 	opacity:0;
-	position:relative;
+	float:left;
 	width:100%;
-	top:50px;
 	-webkit-transform: translate3d(0, 0, 0);
 	@include transition(opacity 240ms ease);
 	}
@@ -72,40 +72,13 @@ body {
 	opacity:1;
 	}
 
-.tile {
-	position:absolute;
-	background-color:$color_lg;
-	background-size:cover;
-	background-position:center;
-	background-repeat:no-repeat;
-	-webkit-transform: translate3d(0, 0, 0);
-	}
-
-.tile .caption {
-	position:absolute;
-	opacity:0;
+.container#log .pane {
+	float:left;
 	width:100%;
-	height:1.2rem;
-	bottom:20px;
+	height:500px;
 	}
-.tile:hover .caption {
-	opacity:1;
-	}
-
-.tile .caption span {
-	position:absolute;
-	color:$color_lg;
-	font-size:0.75rem;
-	line-height:1.2em;
-	bottom:0;
-	}
-.tile .caption span.meta.left {
-	max-width:50%;
-	left:50px;
-	}
-.tile .caption span.meta.right {
-	max-width:50%;
-	right:50px;
+.container#log .pane .slider {
+	width:auto;
 	}
 
 #_404 p,
