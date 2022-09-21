@@ -1,0 +1,14 @@
+<script>
+	var JEKYLL_POST_ARRAY = [];
+	var tags = ["{{ page.cover_meta }}&nbsp;&#9697;&nbsp;{{ page.date | date: '%Y&middot;%m' }}"];
+	{% for img in page.images %}
+		JEKYLL_POST_ARRAY.push({
+				type:  			"post",
+				img_src:    "{{ site.baseurl }}/photos/{{ page.post_id }}_{{ img.ext }}",
+				width:  		"{{ img.width }}",
+				height: 		"{{ img.height }}",
+				meta:   		"{{ img.meta }}",
+				tags:  			tags
+			});
+	{% endfor %}
+</script>
