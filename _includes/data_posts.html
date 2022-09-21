@@ -8,20 +8,20 @@
 		{% endfor %}
 		{% for img in post.images %}
 			imgs.push({
-				img_src:    "{{ site.baseurl }}/photos/{{ post.post_id }}_{{ img.ext }}",
-				width:  		"{{ img.width }}",
-				height: 		"{{ img.height }}",
-				meta:   		"{{ img.meta }}"
+				img_src: 	"{{ site.baseurl }}/photos/{{ post.post_id }}_{{ img.ext }}",
+				width: 		"{{ img.width }}",
+				height: 	"{{ img.height }}",
+				meta: 		"{{ img.meta }}"
 			});
 		{% endfor %}
 		JEKYLL_ARRAY.push({
-			type:       "index",
-			tile_month: "{{ post.date | date: '%m' }}",
-			tile_year:  "{{ post.date | date: '%Y' }}",
-			url:   			"{{ site.baseurl }}{{ post.url }}",
-			images:     imgs,
-			meta:   		"{{ post.cover_meta }}",
-			tags:  			tags
+			title: 			"{{ post.title }}",
+			month: 			"{{ post.date | date: '%m' }}",
+			year: 			"{{ post.date | date: '%Y' }}",
+			url: 				"{{ site.baseurl }}{{ post.url }}",
+			images: 		imgs,
+			meta: 			"{{ post.cover_meta }}",
+			tags: 			tags
 		});
 	{% endfor %}
 </script>
