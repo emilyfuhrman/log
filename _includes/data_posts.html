@@ -8,9 +8,10 @@
 		{% endfor %}
 		{% for img in post.images %}
 			imgs.push({
-				img_src: 	"{{ site.baseurl }}/photos/{{ post.post_id }}_{{ img.ext }}",
+				path: 		"{{ site.baseurl }}/photos/{{ post.post_id }}_{{ img.ext }}",
 				width: 		"{{ img.width }}",
 				height: 	"{{ img.height }}",
+				ext: 			"{{ img.ext }}",
 				meta: 		"{{ img.meta }}"
 			});
 		{% endfor %}

@@ -29,7 +29,8 @@ var Layout_Slides = function(){
 		generatePanes:function(){
 			
 			var panes,
-					sliders;
+					sliders,
+					images;
 
 			panes = vis.c.selectAll('div.pane')
 				.data(vis.posts)
@@ -37,21 +38,32 @@ var Layout_Slides = function(){
 						function(enter){
 							return enter.append('div')
 								.classed('pane',true);
-						},
-						function(update){
 						}
 				);
 
-			// sliders = panes.selectAll('div.slider')
-			// 	.data(function(d){ debugger; })
-			// 	.join(
-			// 			function(enter){
-			// 				return enter.append('div')
-			// 					.classed('slider',true);
-			// 			},
-			// 			function(update){
-			// 			}
-			// 	);
+			sliders = panes.selectAll('div.slider')
+				.data(function(d){ return [d.images]; })
+				.join(
+						function(enter){
+							return enter.append('div')
+								.classed('slider',true);
+						}
+				);
+
+			images = sliders.selectAll('img.tile')
+				.data(function(d){ return d; })
+				.join(
+						function(enter){
+							return enter.append('img')
+								.classed('tile',true)
+								.attr('src',function(d){ return d.path; });
+						},
+						function(update){
+							return update
+								.attr('src',function(d){ return d.path; });
+						}
+				);
+
 
 			// vis.c_jq.imagesLoaded({ background: '.tile' }).always(function(){
 			// 	vis.showGrid();
