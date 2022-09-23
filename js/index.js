@@ -64,10 +64,9 @@ var Layout_Slides = function(){
 						}
 				);
 
-
-			// vis.c_jq.imagesLoaded({ background: '.tile' }).always(function(){
-			// 	vis.showGrid();
-			// });
+			vis.c_jq.imagesLoaded( '.tile' ).always(function(){
+				vis.showGrid();
+			});
 
 		// tiles = vis.c
 		// 	.selectAll(elem_selector)
