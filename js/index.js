@@ -5,18 +5,10 @@ var Layout_Slides = function(){
 		posts_display:[],
 
 		display_settings:{
-			elementHeight:window.innerHeight *0.8,
+			elementHeight:window.innerHeight -120,
 			img_marginH:120,
 			img_marginV:0
 		},
-
-		// media_cutoff:750,
-
-		// grid_settings:{
-		// 	containerWidth:window.innerWidth <this.media_cutoff ? this.media_cutoff : (window.innerWidth +2),
-		// 	idealElementHeight:500,
-		// 	spacing:30
-		// },
 
 		c_jq:$('.container#log'),
 		c:d3.select('.container#log'),
@@ -73,40 +65,53 @@ var Layout_Slides = function(){
 			panes = vis.c.selectAll('div.pane')
 				.data(vis.posts_display)
 				.join(
-						function(enter){
-							return enter.append('div')
-								.classed('pane',true)
-								.style('height',function(d){ return d.display.pane_h +'px'; })
-								.style('padding',function(d){ return (window.innerHeight -d.display.pane_h)/2 +'px 0'; });
-						}
+					function(enter){
+						return enter.append('div')
+							.classed('pane',true)
+							.style('height',function(d){ return d.display.pane_h +'px'; });
+					}
 				);
 
 			sliders = panes.selectAll('div.slider')
 				.data(function(d){ return [d]; })
 				.join(
-						function(enter){
-							return enter.append('div')
-								.classed('slider',true)
-								.style('width',function(d,i){ return d.display.pane_w +'px'; })
-								.style('height',function(d){ return d.display.pane_h +'px'; });
-						}
+					function(enter){
+						return enter.append('div')
+							.classed('slider',true)
+							.style('width',function(d,i){ return d.display.pane_w +'px'; })
+							.style('height',function(d){ return d.display.pane_h +'px'; });
+					}
 				);
 
 			images = sliders.selectAll('img.tile')
 				.data(function(d){ return d.display.images; })
 				.join(
-						function(enter){
-							return enter.append('img')
-								.classed('tile',true)
-								.attr('src',function(d){ return d.path; })
-								.style('width',function(d){ return d.width +'px'; })
-								.style('height',function(d){ return d.height +'px'; })
-								.style('margin',function(){
-									var m_t = vis.display_settings.img_marginV +'px',
-											m_r = vis.display_settings.img_marginH +'px';
-									return m_t +' ' +m_r;
-								});
-						}
+					function(enter){
+						return enter.append('img')
+							.classed('tile',true)
+							.attr('src',function(d){ return d.path; })
+							.style('width',function(d){ return d.width +'px'; })
+							.style('height',function(d){ return d.height +'px'; })
+							.style('margin',function(){
+								var m_t = vis.display_settings.img_marginV +'px',
+										m_r = vis.display_settings.img_marginH +'px';
+								return m_t +' ' +m_r;
+							});
+					}
+				);
+
+			panes.selectAll('div.arr')
+				.data(function(d){
+					return d.display.images.length >2 ? ['l','r'] : false;
+				})
+				.join(
+					function(enter){
+						return enter.append('div')
+							.attr('class',function(d){ return 'arr ' +d; })
+							.style('margin-top',function(d){ 
+								return (vis.display_settings.elementHeight/2)*-1 -40/2 -20 +'px'; 
+							});
+					}
 				);
 
 			vis.c_jq.imagesLoaded( '.tile' ).always(function(){

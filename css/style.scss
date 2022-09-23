@@ -74,6 +74,9 @@ body {
 
 .container#log .pane {
 	float:left;
+	width:100%;
+	padding:20px 0;
+	overflow-x:hidden;
 	}
 .container#log .pane .slider {
 	position:relative;
@@ -82,6 +85,26 @@ body {
 	width:auto;
 	height:100%;
 	overflow:hidden;
+	}
+
+.container#log .pane .arr {
+	opacity:0;
+	cursor:pointer;
+	position:absolute;
+	background:#fff;
+	width:40px;
+	height:40px;
+	z-index:99;
+	@include transition(opacity 240ms ease);
+	}
+.container#log .pane:hover .arr {
+	opacity:1;
+	}
+.container#log .pane .arr.l {
+	left:0;
+	}
+.container#log .pane .arr.r {
+	right:0;
 	}
 
 .container#log .pane .slider img {
