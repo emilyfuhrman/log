@@ -91,11 +91,11 @@ body {
 	opacity:0;
 	cursor:pointer;
 	position:absolute;
-	background:#fff;
+	background:$color_ballet;
 	width:40px;
 	height:40px;
 	z-index:99;
-	@include transition(opacity 240ms ease);
+	@include transition(opacity 360ms ease);
 	}
 .container#log .pane:hover .arr {
 	opacity:1;
