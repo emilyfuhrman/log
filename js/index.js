@@ -4,7 +4,7 @@ var Layout_Slides = function(){
 		posts:JEKYLL_ARRAY,
 		posts_display:[],
 
-		settings_slider:{
+		display_settings:{
 			elementHeight:window.innerHeight *0.8,
 			img_marginH:120,
 			img_marginV:0
@@ -48,8 +48,8 @@ var Layout_Slides = function(){
 					var w_orig = parseFloat(_d.width),
 							h_orig = parseFloat(_d.height);
 
-					obj.width = w_orig*(self.settings_slider.elementHeight/h_orig);
-					obj.height = self.settings_slider.elementHeight;
+					obj.width = w_orig*(self.display_settings.elementHeight/h_orig);
+					obj.height = self.display_settings.elementHeight;
 					obj.ext = _d.ext;
 					obj.meta = _d.meta;
 					obj.path = _d.path;
@@ -58,7 +58,8 @@ var Layout_Slides = function(){
 					d.display.pane_w +=obj.width;
 				});
 
-				d.display.pane_w +=(d.display.images.length*(self.settings_slider.img_marginH*2));
+				d.display.pane_w +=(d.display.images.length*(self.display_settings.img_marginH*2));
+				d.display.pane_h = self.display_settings.elementHeight;
 			});
 		},
 
@@ -75,9 +76,8 @@ var Layout_Slides = function(){
 						function(enter){
 							return enter.append('div')
 								.classed('pane',true)
-								.style('height',function(d){
-									return vis.settings_slider.elementHeight +(vis.settings_slider.img_marginH*2) +'px';
-								});
+								.style('height',function(d){ return d.display.pane_h +'px'; })
+								.style('padding',function(d){ return (window.innerHeight -d.display.pane_h)/2 +'px 0'; });
 						}
 				);
 
@@ -87,7 +87,8 @@ var Layout_Slides = function(){
 						function(enter){
 							return enter.append('div')
 								.classed('slider',true)
-								.style('width',function(d,i){ return d.display.pane_w +'px'; });
+								.style('width',function(d,i){ return d.display.pane_w +'px'; })
+								.style('height',function(d){ return d.display.pane_h +'px'; });
 						}
 				);
 
@@ -98,11 +99,11 @@ var Layout_Slides = function(){
 							return enter.append('img')
 								.classed('tile',true)
 								.attr('src',function(d){ return d.path; })
-								.style('height',function(d){ return d.height +'px'; })
 								.style('width',function(d){ return d.width +'px'; })
+								.style('height',function(d){ return d.height +'px'; })
 								.style('margin',function(){
-									var m_t = vis.settings_slider.img_marginV +'px',
-											m_r = vis.settings_slider.img_marginH +'px';
+									var m_t = vis.display_settings.img_marginV +'px',
+											m_r = vis.display_settings.img_marginH +'px';
 									return m_t +' ' +m_r;
 								});
 						}
