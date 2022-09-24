@@ -5,9 +5,8 @@ var Layout_Slides = function(){
 		posts_display:[],
 
 		display_settings:{
-			elementHeight:window.innerHeight -120,
-			img_marginH:120,
-			img_marginV:0
+			cell_w:window.innerHeight,
+			img_height:window.innerHeight *0.8
 		},
 
 		c_jq:$('.container#log'),
@@ -27,6 +26,7 @@ var Layout_Slides = function(){
 		processData:function(){
 
 			var self = vis;
+			var maxW = 0;
 
 			self.posts_display = JSON.parse(JSON.stringify(self.posts));
 			self.posts_display.forEach(function(d,i){
@@ -36,34 +36,38 @@ var Layout_Slides = function(){
 				d.display.pane_w = 0;
 				d.images.forEach(function(_d,_i){
 
-					var obj = {};
+					var img_obj = {};
 					var w_orig = parseFloat(_d.width),
 							h_orig = parseFloat(_d.height);
 
-					obj.width = w_orig*(self.display_settings.elementHeight/h_orig);
-					obj.height = self.display_settings.elementHeight;
-					obj.ext = _d.ext;
-					obj.meta = _d.meta;
-					obj.path = _d.path;
+					img_obj.width = w_orig*(self.display_settings.img_height/h_orig);
+					img_obj.height = self.display_settings.img_height;
+					img_obj.ext = _d.ext;
+					img_obj.meta = _d.meta;
+					img_obj.path = _d.path;
 
-					d.display.images.push(obj);
-					d.display.pane_w +=obj.width;
+					d.display.images.push(img_obj);
+					self.display_settings.cell_w = 
+						img_obj.width >self.display_settings.cell_w ? img_obj.width : self.display_settings.cell_w;
 				});
-
-				d.display.pane_w +=(d.display.images.length*(self.display_settings.img_marginH*2));
-				d.display.pane_h = self.display_settings.elementHeight;
+			});
+			self.posts_display.forEach(function(d,i){
+				d.display.pane_w = d.display.images.length*self.display_settings.cell_w;
+				d.display.pane_h = self.display_settings.img_height;
 			});
 		},
 
 		//layout logic
 		generatePanes:function(){
-			
+
+			var self = vis;
 			var panes,
 					sliders,
+					imageCells,
 					images;
 
-			panes = vis.c.selectAll('div.pane')
-				.data(vis.posts_display)
+			panes = self.c.selectAll('div.pane')
+				.data(self.posts_display)
 				.join(
 					function(enter){
 						return enter.append('div')
@@ -79,24 +83,34 @@ var Layout_Slides = function(){
 						return enter.append('div')
 							.classed('slider',true)
 							.style('width',function(d,i){ return d.display.pane_w +'px'; })
-							.style('height',function(d){ return d.display.pane_h +'px'; });
+							.style('height',function(d){ return d.display.pane_h +'px'; })
+							.style('left',function(d){return (d.display.pane_w/4)*-1 +'px'; })
+							;
 					}
 				);
 
-			images = sliders.selectAll('img.tile')
+			imageCells = sliders.selectAll('div.imageCell')
 				.data(function(d){ return d.display.images; })
+				.join(
+					function(enter){
+						return enter.append('div')
+							.classed('imageCell',true)
+							.style('width',function(d){ return self.display_settings.cell_w +'px'; })
+							.style('height',function(d){ return self.display_settings.img_height +'px'; })
+							;
+					}
+				);
+
+			images = imageCells.selectAll('img.tile')
+				.data(function(d){ return [d]; })
 				.join(
 					function(enter){
 						return enter.append('img')
 							.classed('tile',true)
 							.attr('src',function(d){ return d.path; })
 							.style('width',function(d){ return d.width +'px'; })
-							.style('height',function(d){ return d.height +'px'; })
-							.style('margin',function(){
-								var m_t = vis.display_settings.img_marginV +'px',
-										m_r = vis.display_settings.img_marginH +'px';
-								return m_t +' ' +m_r;
-							});
+							.style('padding',function(d){ return '0 ' +(self.display_settings.cell_w -d.width)/2 +'px'; })
+							;
 					}
 				);
 
@@ -109,45 +123,21 @@ var Layout_Slides = function(){
 						return enter.append('div')
 							.attr('class',function(d){ return 'arr ' +d; })
 							.style('margin-top',function(d){ 
-								return (vis.display_settings.elementHeight/2)*-1 -40/2 -20 +'px'; 
+								return (self.display_settings.img_height/2)*-1 -40/2 -20 +'px'; 
+							})
+							.on('click',function(d){
+
 							});
 					}
 				);
 
-			vis.c_jq.imagesLoaded( '.tile' ).always(function(){
-				vis.showGrid();
+			self.c_jq.imagesLoaded( '.tile' ).always(function(){
+				self.showGrid();
 			});
 
-		// tiles = vis.c
-		// 	.selectAll(elem_selector)
-		// 	.data(_data)
-		// 	.join(
-		// 		function(enter){
-		// 			return enter.append(elem)
-		// 				.classed('tile',true)
-		// 				.attr('href',function(d){ return d.tile.url || null; })
-		// 				.style('width',function(d){ return d.width +'px'; })
-		// 				.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.tile.height)/parseInt(d.tile.width))*window.innerWidth) +'px'; })
-		// 				.style('left',function(d){ return d.x +'px'; })
-		// 				.style('top',function(d){ return d.y +'px'; })
-		// 				.style('background-image',function(d){ return 'url("' +d.tile.img_src +'")'; })
-		// 				;
-		// 		},
-		// 		function(update){
-		// 			return update
-		// 				.attr('href',function(d){ return d.tile.url; })
-		// 				.style('opacity',0)
-		// 				.style('width',function(d){ return d.width +'px'; })
-		// 				.style('height',function(d){ return window.innerWidth >vis.media_cutoff ? d.height +'px' : ((parseInt(d.tile.height)/parseInt(d.tile.width))*window.innerWidth) +'px'; })
-		// 				.style('left',function(d){ return d.x +'px'; })
-		// 				.style('top',function(d){ return d.y +'px'; })
-		// 				.style('background-image',function(d){ return 'url("' +d.tile.img_src +'")'; })
-		// 				.transition()
-		// 				.duration(360)
-  //  					.ease(d3.easeLinear)
-		// 				.style('opacity',1);
-		// 		}
-		// 	);
+		},
+
+		advanceSlider:function(_dir){
 
 		}
 	}

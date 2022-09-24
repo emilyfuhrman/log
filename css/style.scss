@@ -75,8 +75,8 @@ body {
 .container#log .pane {
 	float:left;
 	width:100%;
-	padding:20px 0;
-	overflow-x:hidden;
+	padding:0;
+	overflow-x:scroll;
 	}
 .container#log .pane .slider {
 	position:relative;
@@ -84,7 +84,16 @@ body {
 	min-width:100%;
 	width:auto;
 	height:100%;
-	overflow:hidden;
+	/*overflow:hidden;*/
+	}
+
+.container#log .pane .slider .imageCell {
+	float:left;
+	}
+
+.container#log .pane .slider .imageCell img {
+	float:left;
+	height:auto;
 	}
 
 .container#log .pane .arr {
@@ -105,12 +114,6 @@ body {
 	}
 .container#log .pane .arr.r {
 	right:0;
-	}
-
-.container#log .pane .slider img {
-	position:relative;
-	width:auto;
-	height:100%;
 	}
 
 #_404 p,
