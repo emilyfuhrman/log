@@ -5,8 +5,9 @@ var Layout_Slides = function(){
 		posts_display:[],
 
 		display_settings:{
+			pane_padding:(window.innerHeight *0.1)/2,
 			cell_w:window.innerHeight,
-			img_height:window.innerHeight *0.8
+			img_height:window.innerHeight *0.9
 		},
 
 		c_jq:$('.container#log'),
@@ -72,7 +73,9 @@ var Layout_Slides = function(){
 					function(enter){
 						return enter.append('div')
 							.classed('pane',true)
-							.style('height',function(d){ return d.display.pane_h +'px'; });
+							.style('height',function(d){ return d.display.pane_h +'px'; })
+							.style('padding',function(d){ return self.display_settings.pane_padding +'px 0'; })
+							;
 					}
 				);
 
