@@ -83,6 +83,7 @@ body {
 	min-width:100%;
 	width:auto;
 	height:100%;
+	@include transition(left 120ms ease);
 	/*overflow:hidden;*/
 	}
 

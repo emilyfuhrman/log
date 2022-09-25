@@ -5,9 +5,9 @@ var Layout_Slides = function(){
 		posts_display:[],
 
 		display_settings:{
-			pane_padding:(window.innerHeight *0.1)/2,
+			pane_padding:20,
 			cell_w:window.innerHeight,
-			img_height:window.innerHeight *0.9
+			img_height:window.innerHeight -40
 		},
 
 		c_jq:$('.container#log'),
@@ -134,8 +134,8 @@ var Layout_Slides = function(){
 							.style('margin-top',function(d){ 
 								return (self.display_settings.img_height/2)*-1 -40/2 -20 +'px'; 
 							})
-							.on('click',function(d){
-
+							.on('click',function(e,d){
+								self.advanceSlider(d, this.parentNode.firstChild);
 							});
 					}
 				);
@@ -146,8 +146,20 @@ var Layout_Slides = function(){
 
 		},
 
-		advanceSlider:function(_dir){
+		advanceSlider:function(_dir, _slider){
 
+			var self = vis;
+			var target = d3.select(_slider);
+			var dif = self.display_settings.cell_w;
+			var pos = parseFloat(target.style('left').split('px')[0]);
+
+			if(_dir === 'l'){
+				pos +=dif;
+			} else if(_dir === 'r'){
+				pos -=dif;
+			}
+
+			target.style('left', pos +'px');
 		}
 	}
 }
