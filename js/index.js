@@ -84,7 +84,13 @@ var Layout_Slides = function(){
 							.classed('slider',true)
 							.style('width',function(d,i){ return d.display.pane_w +'px'; })
 							.style('height',function(d){ return d.display.pane_h +'px'; })
-							.style('left',function(d){return (d.display.pane_w/4)*-1 +'px'; })
+							.style('left',function(d){ 
+								return  window.innerWidth/2 -
+									(d.display.images.length >1
+										? d.display.pane_w/2
+										: self.display_settings.cell_w/2) 
+									+'px'; 
+							})
 							;
 					}
 				);
