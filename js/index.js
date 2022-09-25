@@ -4,6 +4,8 @@ var Layout_Slides = function(){
 		posts:JEKYLL_ARRAY,
 		posts_display:[],
 
+		cache:[],
+
 		display_settings:{
 			pane_padding:20,
 			cell_w:window.innerHeight,
@@ -21,6 +23,24 @@ var Layout_Slides = function(){
 		showGrid:function(){
 			vis.l.classed('hide',true);
 			vis.c.classed('hide',false).classed('show',true);
+		},
+
+		//cache all images
+		preloadImages:function(){
+
+			var self = vis;
+
+			function preloadImage(_url){
+				var img = new Image();
+				img.src = _url;
+				self.cache.push(img);
+			}
+
+			self.posts.forEach(function(p){
+				p.images.forEach(function(_p){
+					preloadImage(_p.path);
+				});
+			});
 		},
 
 		//recompute image widths, etc.
@@ -118,6 +138,14 @@ var Layout_Slides = function(){
 							.classed('tile',true)
 							.attr('src',function(d){ return d.path; })
 							.style('width',function(d){ return d.width +'px'; })
+							.style('height',function(d){ return self.display_settings.img_height +'px'; })
+							.style('padding',function(d){ return '0 ' +(self.display_settings.cell_w -d.width)/2 +'px'; })
+							;
+					},
+					function(update){
+						return update
+							.attr('src',function(d){ return d.path; })
+							.style('width',function(d){ return d.width +'px'; })
 							.style('padding',function(d){ return '0 ' +(self.display_settings.cell_w -d.width)/2 +'px'; })
 							;
 					}
@@ -150,16 +178,21 @@ var Layout_Slides = function(){
 
 			var self = vis;
 			var target = d3.select(_slider);
-			var dif = self.display_settings.cell_w;
-			var pos = parseFloat(target.style('left').split('px')[0]);
+			var arr_slides = _slider.__data__.display.images;
+			// var dif = self.display_settings.cell_w;
+			// var pos = parseFloat(target.style('left').split('px')[0]);
 
 			if(_dir === 'l'){
-				pos +=dif;
+				var move = arr_slides.pop();
+				arr_slides.unshift(move);
+				// pos +=dif;
 			} else if(_dir === 'r'){
-				pos -=dif;
+				// pos -=dif;
 			}
 
-			target.style('left', pos +'px');
+			self.generatePanes();
+
+			// target.style('left', pos +'px');
 		}
 	}
 }
@@ -168,6 +201,9 @@ var vis = Layout_Slides();
 vis.processData();
 vis.generatePanes();
 
+window.onload = function(){
+	vis.preloadImages();
+}
 window.onresize = function(){
 	// vis.grid_settings.containerWidth = window.innerWidth <vis.media_cutoff ? vis.media_cutoff : (window.innerWidth +2);
 	// vis.generateGridDimensions(vis.grid_settings, vis.tiles);
