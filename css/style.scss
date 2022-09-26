@@ -61,8 +61,15 @@ body {
 	margin:0 40px;
 	}
 
+
+/* 	------------------------------------
+		IMAGE CAROUSEL
+   	------------------------------------ */
+
 $carousel-width:600px;
 $carousel-height:300px;
+
+body * { -webkit-user-select: none }
 
 .container#log {
 	opacity:0;
@@ -148,59 +155,13 @@ $carousel-height:300px;
 	right:0;
 	}
 
-
-
-								body * { -webkit-user-select: none }
-
-								.wrap {
-									color:#fff;
-								  position: relative;
-								  width: $carousel-width;
-								  height: 300px;
-								  margin: 0 auto;
-								}
-
-								.window {
-								  overflow: hidden;
-								  position: relative;
-								  background: #222;
-								}
-
-								#carousel {
-								  width: 10000px;
-								  position: relative;
-								  top: 0; left: -450px;
-								}
-
-								.slide {
-								  height: 300px;
-								  width: 500px;
-								  cursor: pointer;
-								  float: left;
-								  display: flex;
-								  flex-direction: column;
-								  justify-content: center;
-								}
-
-								.slide#b1 { background: #556270 }
-								.slide#b2 { background: #4ECDC4 }
-								.slide#b3 { background: #9CE462 }
-								.slide#b4 { background: #FF6B6B }
-								.slide#b5 { background: #C44D33 }
-
-								#prev, #next {
-								  cursor: pointer;
-								  position: absolute;
-								  bottom: -40px;
-								  font-size: 14pt;
-								}
-
-								#prev { left: 0 }
-								#next { right: 0 }
-
 .transition {
 	transition:0.7s;
 	}
+
+/* 	====================================
+		LAYOUT: 404
+   	==================================== */
 
 #_404 p,
 #_404 p a {
@@ -218,17 +179,14 @@ $carousel-height:300px;
 	background:$color_ballet;
 	}
 
+/* 	====================================
+		BREAK POINTS
+   	==================================== */
+
 @media (max-width: 750px) {
 	.container#log {
 		top:0;
 	}
-
-  .tile {
-  	float:left;
-  	position:static !important;
-  	width:100% !important;
-  	margin-bottom:1px;
-  }
 }
 
 /* 	====================================
