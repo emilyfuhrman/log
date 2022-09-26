@@ -103,7 +103,7 @@ $carousel-height:300px;
 	top:0;
 	left:-450px;
 
-	@include transition(left 180ms ease);
+	/*@include transition(left 180ms ease);*/
 	}
 
 .container#log .wrap .window .carousel .slide {

@@ -4,9 +4,9 @@
 <div id="log" class="container">
 	{% assign i = 0 %}
 	{% for post in site.posts %}
-		<div class='wrap'>
+		<div class='wrap' id='_{{ i }}'>
 			<div class='window'>
-				<div class='carousel' id='_{{ i }}'>
+				<div class='carousel'>
 					{% assign j = 0 %}
 					{% for img in post.images %}
 						<div class='slide' id='_{{ i }}_{{ j }}'>
@@ -17,28 +17,12 @@
 				</div>
 			</div>
 			{% if post.images.size >1 %}
-				<div class='arr prev' id='_{{ i }}p'></div>
-				<div class='arr next' id='_{{ i }}n'></div>
+				<div class='arr prev'></div>
+				<div class='arr next'></div>
 			{% endif %}
 		</div>
 		{% assign i = i | plus:1 %}
 	{% endfor %}
-
-<div class="wrap">
-  <div class="window">
-    <div id="carousel">
-      <div class="slide" id="b1"><img class="tile" src="/log/photos/2022-04-IT_01.jpg">SLIDE-1</div>
-      <div class="slide" id="b2"><img class="tile" src="/log/photos/2022-04-IT_02.jpg">SLIDE-2</div>
-      <div class="slide" id="b3"><img class="tile" src="/log/photos/2018-05-US-CA_00.jpg">SLIDE-3</div>
-      <div class="slide" id="b4"><img class="tile" src="/log/photos/2022-04-IT_00.jpg">SLIDE-4</div>
-      <div class="slide" id="b5"><img class="tile" src="/log/photos/2019-02-ES_01.jpg">SLIDE-5</div>
-    </div>
-  </div>
-  <span id="prev">PREV</span>
-  <span id="next">NEXT</span>
-</div>
-
-
 </div>
 {% include loading-animation.html %}
 <script src='/log/js/layouts/carousel.js'></script>

@@ -2,14 +2,15 @@
  * Simple jQuery Infinite Carousel
  * SOURCE: https://codepen.io/matthewwilliams/pen/Vayrjv
  */
-var carousel = $('#carousel'),
+var focus_id = '_0';
+var carousel = $('#' +focus_id +' .carousel'),
     threshold = 150,
     slideWidth = 500,
     dragStart, 
     dragEnd;
 
-$('#next').click(function(){ shiftSlide(-1) })
-$('#prev').click(function(){ shiftSlide(1) })
+$('#' +focus_id +' .next').click(function(){ shiftSlide(-1) })
+$('#' +focus_id +' .prev').click(function(){ shiftSlide(1) })
 
 carousel.on('mousedown', function(){
   if (carousel.hasClass('transition')) return;
@@ -38,9 +39,9 @@ function shiftSlide(direction) {
           .css('transform','translateX(' + (direction * slideWidth) + 'px)'); 
   setTimeout(function(){
     if (direction === 1) {
-      $('#carousel .slide:first').before($('#carousel .slide:last'));
+      $('#' +focus_id +' .slide:first').before($('#' +focus_id +' .slide:last'));
     } else if (direction === -1) {
-      $('#carousel .slide:last').after($('#carousel .slide:first'));
+      $('#' +focus_id +' .slide:last').after($('#' +focus_id +' .slide:first'));
     }
     carousel.removeClass('transition')
     carousel.css('transform','translateX(0px)'); 
