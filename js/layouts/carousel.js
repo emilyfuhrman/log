@@ -6,6 +6,8 @@ var threshold = 150,
     slideWidth = 500,
     dragStart, 
     dragEnd;
+var cache = [];
+var posts = JEKYLL_ARRAY;
 
 $('.next').click(function(){ shiftSlide(this,-1) })
 $('.prev').click(function(){ shiftSlide(this, 1) })
@@ -47,4 +49,21 @@ function shiftSlide(_elem, _direction) {
     carousel.removeClass('transition')
     carousel.css('transform','translateX(0px)'); 
   },700)
+}
+
+function preloadImage(_url){
+  var img = new Image();
+  img.src = _url;
+  cache.push(img);
+}
+function preloadImages(){
+  posts.forEach(function(p){
+    p.images.forEach(function(_p){
+      preloadImage(_p.path);
+    });
+  });
+}
+
+window.onload = function(){
+  preloadImages();
 }
