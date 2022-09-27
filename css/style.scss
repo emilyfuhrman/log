@@ -66,8 +66,10 @@ body {
 		IMAGE CAROUSEL
    	------------------------------------ */
 
-$carousel-width:600px;
-$carousel-height:300px;
+$carousel-width:100vw;
+$carousel-height:80vh;
+/*$carousel-width:600px;
+$carousel-height:300px;*/
 
 body * { -webkit-user-select: none }
 
@@ -83,11 +85,10 @@ body * { -webkit-user-select: none }
 	}
 
 .container#log .wrap {
-
-  position: relative;
-  width: $carousel-width;
-  height: 300px;
-  margin: 0 auto;
+  position:relative;
+  width:$carousel-width;
+  height:$carousel-height;
+  margin:0 auto;
 	}
 
 .container#log .wrap .window {
@@ -98,7 +99,8 @@ body * { -webkit-user-select: none }
 	position:relative;
 	width:10000px;
 	top:0;
-	left:-450px;
+	/*left:-450px;*/
+	left:calc(#{$carousel-width} / -2);
 	}
 
 .container#log .wrap .window .carousel .slide {
@@ -106,7 +108,8 @@ body * { -webkit-user-select: none }
 	color:#fff;
 	float:left;
 	display:flex;
-	width:500px;
+	/*width:500px;*/
+	width:calc(#{$carousel-width} - 500px);
 	height:$carousel-height;
 	flex-direction:column;
 	justify-content:center;
@@ -140,8 +143,14 @@ body * { -webkit-user-select: none }
 	right:0;
 	}
 
+.container#log .wrap .post-text {
+	position:absolute;
+	color:#fff;
+	bottom:0;
+	}
+
 .transition {
-	transition:0.7s;
+	transition:360ms;
 	}
 
 /* 	====================================

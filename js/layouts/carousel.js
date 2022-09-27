@@ -3,7 +3,8 @@
  * SOURCE: https://codepen.io/matthewwilliams/pen/Vayrjv
  */
 var threshold = 150,
-    slideWidth = 500,
+    // slideWidth = 500,
+    slideWidth = window.innerWidth - 500, //must match `.slide` width in CSS
     dragStart, 
     dragEnd;
 var cache = [];
