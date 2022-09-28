@@ -50,15 +50,18 @@ body {
 	z-index:99;
 	opacity:1;
 	visibility:visible;
-	position:fixed;
 	}
 #title-container a {
 	text-decoration:none;
 	}
 #title-container a #title {
+	position:fixed;
 	color:#fff;
 	width:auto;
-	margin:0 40px;
+	line-height:1rem;
+	top:30px;
+	left:65px;
+	z-index:1000;
 	}
 
 
