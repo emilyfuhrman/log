@@ -70,7 +70,7 @@ body {
    	------------------------------------ */
 
 $carousel-width:100vw;
-$carousel-height:80vh;
+$carousel-height:85vh;
 /*$carousel-width:600px;
 $carousel-height:300px;*/
 
@@ -80,6 +80,7 @@ body * { -webkit-user-select: none }
 	opacity:0;
 	float:left;
 	width:100%;
+	margin-top:105px;
 	-webkit-transform: translate3d(0, 0, 0);
 	@include transition(opacity 240ms ease);
 	}
