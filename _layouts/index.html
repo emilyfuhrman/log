@@ -10,7 +10,7 @@
 					{% assign j = 0 %}
 					{% for img in post.images %}
 						<div class='slide' id='_{{ i }}_{{ j }}'>
-							<img class='tile' src='{{ site.baseurl }}/photos/{{ post.post_id }}_{{ img.ext }}'>
+							<img class='tile' src='{{ site.baseurl }}/photos/{{ img.ext }}'>
 						</div>
 						{% assign j = j | plus:1 %}
 					{% endfor %}
@@ -20,7 +20,10 @@
 				<div class='arr prev'></div>
 				<div class='arr next'></div>
 			{% endif %}
-			<div class='post-text'>{{ post.content }}</div>
+		</div>
+		<div class='post-text'>
+			<span class='title'>{{ post.title }}</span>
+			<span class='content'>{{ post.content }}</span>
 		</div>
 		{% assign i = i | plus:1 %}
 	{% endfor %}
