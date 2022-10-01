@@ -87,6 +87,15 @@ body * { -webkit-user-select: none }
 	opacity:1;
 	}
 
+.container#log .borderline {
+	position:absolute;
+	width:calc(100% - 40px);
+	height:0;
+	left:20px;
+	padding-bottom:20px;
+	border-top:1px solid #fff;
+	}
+
 .container#log .wrap {
   position:relative;
   width:$carousel-width;
@@ -97,7 +106,7 @@ body * { -webkit-user-select: none }
 .container#log .wrap .window {
 	position:relative;
 	overflow:hidden;
-	margin:20px 0;
+	padding:20px 0;
 	}
 .container#log .wrap .window .carousel {
 	position:relative;
