@@ -6,23 +6,25 @@ var threshold = 150,
     slideWidth = util_computeSlideWidth(),
     dragStart, 
     dragEnd;
+var carousels = $('.carousel');
 var cache = [];
 var posts = JEKYLL_ARRAY;
 
-$('.next').click(function(){ shiftSlide(this,-1) })
-$('.prev').click(function(){ shiftSlide(this, 1) })
+$('.next').click(function(){ shiftSlide( $(this).parent().attr('id'), -1 ) })
+$('.prev').click(function(){ shiftSlide( $(this).parent().attr('id'),  1 ) })
 
-// carousel.on('mousedown', function(){
-//   if (carousel.hasClass('transition')) return;
+// carousels.on('mousedown', function(){
+//   var id = $(this).parent().parent().attr('id');
+//   if (carousels.hasClass('transition')) return;
 //   dragStart = event.pageX;
 //   $(this).on('mousemove', function(){
 //     dragEnd = event.pageX;
 //     $(this).css('transform','translateX('+ dragPos() +'px)')
 //   })
 //   $(document).on('mouseup', function(){
-//     if (dragPos() > threshold) { return shiftSlide(1) }
-//     if (dragPos() < -threshold) { return shiftSlide(-1) }
-//     shiftSlide(0);
+//     if (dragPos() > threshold) { return shiftSlide(id, 1) }
+//     if (dragPos() < -threshold) { return shiftSlide(id, -1) }
+//     shiftSlide(id, 0);
 //   })
 // });
 
@@ -34,9 +36,8 @@ function util_computeSlideWidth(){
   return window.innerWidth - (window.innerWidth*0.25); //must match `.slide` width in CSS
 }
 
-function shiftSlide(_elem, _direction) {
-  var focus_id = $(_elem).parent().attr('id');
-  var carousel = $('#' +focus_id +' .carousel');
+function shiftSlide(_id, _direction) {
+  var carousel = $('#' +_id +' .carousel');
 
   if (carousel.hasClass('transition')) return;
   dragEnd = dragStart;
@@ -46,9 +47,9 @@ function shiftSlide(_elem, _direction) {
           .css('transform','translateX(' + (_direction * slideWidth) + 'px)'); 
   setTimeout(function(){
     if (_direction === 1) {
-      $('#' +focus_id +' .slide:first').before($('#' +focus_id +' .slide:last'));
+      $('#' +_id +' .slide:first').before($('#' +_id +' .slide:last'));
     } else if (_direction === -1) {
-      $('#' +focus_id +' .slide:last').after($('#' +focus_id +' .slide:first'));
+      $('#' +_id +' .slide:last').after($('#' +_id +' .slide:first'));
     }
     carousel.removeClass('transition')
     carousel.css('transform','translateX(0px)'); 
