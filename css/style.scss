@@ -127,6 +127,12 @@ body * { -webkit-user-select: none }
 	overflow:hidden;
 	}
 
+/*.container#log .wrap .window .carousel .slide .number {
+	position:absolute;
+	font-size:0.5rem;
+	top:calc(#{$carousel-height} - 1rem);
+	}*/
+
 .container#log .wrap .window .carousel .slide img {
 	display:block;
 	width:auto;
@@ -178,7 +184,8 @@ body * { -webkit-user-select: none }
 .container#log .post-text span.content {
 	font-size:0.5rem;
 	text-transform:uppercase;
-	line-height:0.5rem;
+  line-height:0.75rem;
+  padding-top:0.5rem;
 	}
 
 .transition {

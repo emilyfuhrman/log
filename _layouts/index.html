@@ -4,14 +4,18 @@
 <div id="log" class="container">
 	{% assign i = 0 %}
 	{% for post in site.posts %}
+		{% assign dynamic_caption = '' %}
 		<div class='wrap' id='_{{ i }}'>
 			<div class='window'>
 				<div class='carousel'>
-					{% assign j = 0 %}
+					{% assign j = 1 %}
 					{% for img in post.images %}
 						<div class='slide' id='_{{ i }}_{{ j }}'>
+							<!-- <span class='number'>{{ j }}.</span> -->
 							<img class='tile' src='{{ site.baseurl }}/photos/{{ img.ext }}'>
 						</div>
+						{% assign new_var = my_var | append: ' - ' | append: another_var %}
+						{% assign dynamic_caption = dynamic_caption | append: j | append: '. ' | append: img.meta | append: '&nbsp;&nbsp;&nbsp;&nbsp;' %}
 						{% assign j = j | plus:1 %}
 					{% endfor %}
 				</div>
@@ -23,7 +27,8 @@
 		</div>
 		<div class='post-text'>
 			<span class='title'>{{ post.title }}</span>
-			<span class='content'>{{ post.content }}</span>
+			<span class='content'>{{ dynamic_caption }}</span>
+			<!-- <span class='content'>{{ post.content }}</span> -->
 		</div>
 		<div class='borderline'></div>
 		{% assign i = i | plus:1 %}
