@@ -70,9 +70,8 @@ body {
    	------------------------------------ */
 
 $carousel-width:100vw;
-$carousel-height:85vh;
-/*$carousel-width:600px;
-$carousel-height:300px;*/
+$carousel-height:45vw;
+$carousel-margin:25vw;
 
 body * { -webkit-user-select: none }
 
@@ -104,8 +103,7 @@ body * { -webkit-user-select: none }
 	position:relative;
 	width:10000px;
 	top:0;
-	/*left:-450px;*/
-	left:calc((#{$carousel-width} - 400px - 200px) * -1);
+	left:calc((#{$carousel-width} - #{$carousel-margin} - (#{$carousel-margin}/2)) * -1);
 	}
 
 .container#log .wrap .window .carousel .slide {
@@ -113,11 +111,11 @@ body * { -webkit-user-select: none }
 	color:#fff;
 	float:left;
 	display:flex;
-	/*width:500px;*/
-	width:calc(#{$carousel-width} - 400px);
+	width:calc(#{$carousel-width} - #{$carousel-margin});
 	height:$carousel-height;
 	flex-direction:column;
 	justify-content:center;
+	overflow:hidden;
 	}
 
 .container#log .wrap .window .carousel .slide img {
@@ -126,12 +124,6 @@ body * { -webkit-user-select: none }
 	height:100%;
 	margin:0 auto;
 	}
-/*.container#log .wrap .window .carousel .slide .number {
-	position:absolute;
-	display:block;
-	font-size:0.5rem;
-	margin-top:calc(#{$carousel-height} - 0.5rem);
-	}*/
 
 .container#log .wrap .arr {
 	opacity:0;

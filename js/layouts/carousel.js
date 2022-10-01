@@ -3,8 +3,7 @@
  * SOURCE: https://codepen.io/matthewwilliams/pen/Vayrjv
  */
 var threshold = 150,
-    // slideWidth = 500,
-    slideWidth = window.innerWidth - 400, //must match `.slide` width in CSS
+    slideWidth = util_computeSlideWidth(),
     dragStart, 
     dragEnd;
 var cache = [];
@@ -29,6 +28,10 @@ $('.prev').click(function(){ shiftSlide(this, 1) })
 
 function dragPos() {
   return dragEnd - dragStart;
+}
+
+function util_computeSlideWidth(){
+  return window.innerWidth - (window.innerWidth*0.25); //must match `.slide` width in CSS
 }
 
 function shiftSlide(_elem, _direction) {
@@ -65,6 +68,9 @@ function preloadImages(){
   });
 }
 
+window.onresize = function(){
+  slideWidth = util_computeSlideWidth();
+}
 window.onload = function(){
   preloadImages();
 }
