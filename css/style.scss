@@ -128,17 +128,22 @@ body * { -webkit-user-select: none }
 	}
 
 .container#log .wrap .window .carousel .slide-container {
-	/*width:fit-content;*/
+	position:relative;
+	display:inline-block;
+	width:fit-content;
+	width:intrinsic;           /* Safari/WebKit uses a non-standard name */
+  width:-moz-max-content;    /* Firefox/Gecko */
+  width:-webkit-max-content; /* Chrome */
 	height:100%;
-	left:inherit;
 	margin:0 auto;
 	}
 
 .container#log .wrap .window .carousel .slide .number {
 	position:absolute;
 	font-size:0.5rem;
+	text-align:left;
 	top:calc(#{$carousel-height} - 1rem);
-	margin-left:-1.5rem;
+	left:-1.5rem;
 	}
 
 .container#log .wrap .window .carousel .slide img {
