@@ -128,8 +128,9 @@ body * { -webkit-user-select: none }
 	}
 
 .container#log .wrap .window .carousel .slide-container {
-	width:fit-content;
+	/*width:fit-content;*/
 	height:100%;
+	left:inherit;
 	margin:0 auto;
 	}
 
