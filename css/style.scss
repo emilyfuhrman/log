@@ -127,11 +127,18 @@ body * { -webkit-user-select: none }
 	overflow:hidden;
 	}
 
-/*.container#log .wrap .window .carousel .slide .number {
+.container#log .wrap .window .carousel .slide-container {
+	width:fit-content;
+	height:100%;
+	margin:0 auto;
+	}
+
+.container#log .wrap .window .carousel .slide .number {
 	position:absolute;
 	font-size:0.5rem;
 	top:calc(#{$carousel-height} - 1rem);
-	}*/
+	margin-left:-1.5rem;
+	}
 
 .container#log .wrap .window .carousel .slide img {
 	display:block;
