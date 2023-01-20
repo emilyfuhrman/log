@@ -113,7 +113,8 @@ body * { -webkit-user-select: none }
 	position:relative;
 	width:10000px;
 	top:0;
-	left:calc((#{$carousel-width} - #{$carousel-margin} - (#{$carousel-margin}/2)) * -1);
+	/*left:calc((#{$carousel-width} - #{$carousel-margin} - (#{$carousel-margin}/2)) * -1);*/
+	left:calc(#{$carousel-margin}/8);
 	}
 
 .container#log .wrap .window .carousel .slide {
