@@ -47,6 +47,10 @@ body {
 	@include box-sizing(border-box);
 	}
 
+span.b {
+	font-weight:bold;
+	}
+
 .container#log,
 #title-container {
 	float:left;
@@ -68,17 +72,18 @@ body {
 	margin:0;
 	padding:0;
 	}
-
-#title-container ul a {
+#title-container ul li {
 	float:left;
-	text-decoration:none;
 	width:100%;
 	}
-#title-container ul a span {
+#title-container ul li a {
+	text-decoration:none;
+	}
+#title-container ul li a span {
 	color:$color_black;
 	line-height:1rem;
 	}
-#title-container ul a:hover span {
+#title-container ul li a:hover span {
 	background:$color_black;
 	color:$color_white;
 	}
