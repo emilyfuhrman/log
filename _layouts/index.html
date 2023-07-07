@@ -7,10 +7,14 @@
 				<div class='slide'>
 						<img class='tile' src='{{ site.baseurl }}/photos/{{ img.ext }}'>
 				</div>
+				<div class='post-text'>
+					<span class='content'>
+						{{ post.date | date: "%Y/%m/%d" }}
+						<!-- <br/>
+						{{ img.meta }} -->
+					</span>
+				</div>
 			{% endfor %}
-			<div class='post-text'>
-				<span class='content'>{{ post.date | date: "%Y/%m/%d" }}</span>
-			</div>
 		</div>
 		{% assign i = i | plus:1 %}
 	{% endfor %}
