@@ -134,26 +134,20 @@ body * { -webkit-user-select: none }
 	width:100%;
 	height:auto;
 	margin:0 auto;
+	padding:0 0 0.5rem 0;
 	box-shadow:2px 2px 20px rgba(255, 255, 255, 0.25);
 	}
 
-.container#log .post .post-text {
+.container#log .post span {
 	float:left;
 	color:$color_black;
 	width:100%;
-	margin:0;
-	padding:0;
 	}
-
-.container#log .post-text span {
-	float:left;
-	width:100%;
-	}
-.container#log .post-text span.content {
+.container#log .post span.content {
 	font-size:0.65rem;
-	text-transform:uppercase;
+	/*text-transform:uppercase;*/
   line-height:1rem;
-  padding:0.5rem 0 0;
+  padding:0;
 	}
 
 /* 	====================================
