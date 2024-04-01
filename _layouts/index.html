@@ -4,12 +4,11 @@
 	{% for post in site.posts %}
 		<div class='post'>
 			{% for img in post.images %}
-				<div class='slide'>
-						<img class='tile' src='{{ site.baseurl }}/photos/{{ img.ext }}'>
-						<!-- <span class='content meta'>{{ img.meta }}</span> -->
-				</div>
+			<div class='slide'>
+					<img class='tile' src='{{ site.baseurl }}/photos/{{ img.ext }}'>
+			</div>
+			<span class='content'>{{ img.date | date: "%Y/%m/%d" }}&nbsp;_&nbsp;{{ img.meta }}</span>
 			{% endfor %}
-			<span class='content'>{{ post.date | date: "%Y/%m/%d" }}</span>
 		</div>
 		{% assign i = i | plus:1 %}
 	{% endfor %}
